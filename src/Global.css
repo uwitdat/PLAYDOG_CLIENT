@@ -1,5 +1,7 @@
 :root {
   --color-orange: rgb(207, 102, 3);
+  --color-grey-light: rgb(238, 238, 238);
+  --color-grey-dark: rgb(71, 71, 71);
   --font-title: "Luckiest Guy", cursive;
 }
 
