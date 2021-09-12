@@ -1,0 +1,12 @@
+import React from 'react'
+import './HomePage.css'
+
+const HomePage = () => {
+    return (
+        <div className='HomePage__container'>
+            <h1>HomePage</h1>
+        </div>
+    )
+}
+
+export default HomePage
