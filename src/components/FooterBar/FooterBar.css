@@ -19,3 +19,7 @@
   color: var(--color-orange);
   margin-top: 5rem;
 }
+
+.active {
+  color: black;
+}

@@ -12,6 +12,7 @@ const linkStyle = {
 }
 
 const FooterBar = () => {
+
     return (
         <div className='FooterBar'>
             <Link to='/' style={linkStyle}><span className='FooterBar__icon'><AiFillHome /></span></Link>
