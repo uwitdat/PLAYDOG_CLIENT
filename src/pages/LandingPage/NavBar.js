@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import React from 'react'
-import './LandingPage.css'
+import './LandingPage.scss'
 import { Navbar, Container, Nav } from 'react-bootstrap';
 
 const NavBar = ({state}) => {
