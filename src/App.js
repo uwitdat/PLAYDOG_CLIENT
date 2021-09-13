@@ -15,6 +15,8 @@ import ForgotPassword from "components/Auth/ForgotPassword/ForgotPassword";
 import { SET_WINDOW_WIDTH } from "redux-store/types";
 import { connect, useDispatch } from "react-redux";
 import { useEffect } from 'react';
+import HeaderBar from 'components/HeaderBar/HeaderBar';
+import FooterBar from 'components/FooterBar/FooterBar';
 
 function App() {
   let path = window.location.pathname;
