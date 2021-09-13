@@ -4,6 +4,7 @@ const initialState = {
   showSearchFilters: false
 };
 
+// eslint-disable-next-line
 export default function(state = initialState, action) {
   switch (action.type) {
     case SET_SHOW_MENU_FILTERS:
