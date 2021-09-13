@@ -5,14 +5,15 @@ import {
 } from "react-router-dom";
 import HeaderBar from './components/HeaderBar/HeaderBar';
 import FooterBar from './components/FooterBar/FooterBar'
-import HomePage from './components/pages/HomePage/HomePage'
-import EventsPage from './components/pages/EventsPage/EventsPage'
-import DogsPage from './components/pages/DogsPage/DogsPage'
-import NewEventPage from './components/pages/NewEventPage/NewEventPage'
-import LoginPage from './components/pages/LoginPage/LoginPage'
+import HomePage from './pages/HomePage/HomePage'
+import EventsPage from './pages/EventsPage/EventsPage'
+import DogsPage from './pages/DogsPage/DogsPage'
+import NewEventPage from './pages/NewEventPage/NewEventPage'
+import LoginPage from './pages/LoginPage/LoginPage'
+import ProfilePage from './pages/ProfilePage/ProfilePage'
 
 function App() {
-  console.log(window.location.pathname)
+
   return (
     <Router>
       <div className="App">
@@ -22,6 +23,7 @@ function App() {
         <Route path='/dogs' component={DogsPage} />
         <Route path='/new-event' component={NewEventPage} />
         <Route path='/login' component={LoginPage} />
+        <Route path='/profile' component={ProfilePage} />
         <FooterBar />
       </div>
     </Router>
