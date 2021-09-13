@@ -3,8 +3,8 @@ import { useFirebase } from "react-redux-firebase";
 import { useHistory, Link } from "react-router-dom";
 // import Notifications from "../../General/Notifications/Notifications";
 import "../Auth.scss";
-import Copyright from 'components/Copyright/Copyright';
 import { connect } from 'react-redux';
+import { Container, Row, Form, Col } from 'react-bootstrap';
 
 function SignIn({responsive}) {
   const firebase = useFirebase();
@@ -62,110 +62,95 @@ function SignIn({responsive}) {
   };
 
   return (
-    <div>
-      <div>
-        <h5>
-          Sign in
-        </h5>
-
-        {errors.error.length > 0 && (
-        <div className="mt-2">
-          <span>Error</span>
-          {errors.error}
-        </div>
-        )}
-
-        <form noValidate>
-          <fieldset>
-            <input
-              required
-              id="email"
-              label={errors.email.length < 1 ? "Email Address" : "Email ERROR"}
-              name="email"
-              autoComplete="email"
-              autoFocus
-              type="email"
-              onChange={(e) => setEmail(e.target.value)}
-              error={errors.email.length > 0 ? errors.email : ''}
-            />
-
-            <span>
-              {errors.email.length > 0 && errors.email}
-            </span>
-          </fieldset>
-
-          <fieldset>
-            <input
-              required
-              name="password"
-              label={errors.password.length < 1 ? "Password" : "Password ERROR"}
-              id="password"
-              autoComplete="current-password"
-              type="password"
-              onChange={(e) => setPassword(e.target.value)}
-              error={errors.password.length > 0 ? errors.password : ''}
-            />
-
-            <span>
-              {errors.password.length > 0 && errors.password}
-            </span>
-          </fieldset>
-
-          <label htmlFor="checkbox">
-            Remember Me
-          </label>
-
-          <input type="checkbox" value="remember" color="primary" />
-
-          <button
-            type="submit"
-            className="sign-in--email primary-bg"
-            onClick={(event) => signInWithProvider(event, "email")}
-          >
-            Sign In
-          </button>
-
-
-          <div>
-            <div>
-              <Link to="/forgot-password" variant="body2">
-                <p>
-                    Forgot Password?
-                </p>
-              </Link>
-            </div>
-
+    <Container>
+      <Row>
+        <div className="login">
+          <h2 className="text-center">Login</h2><br/>
+          {errors.error.length > 0 && (
             <div className="mt-2">
-              <Link to="/sign-up">
-                <p
-                  className="display-center"
-                >
-                    Don&apos;t have an account?
-                    <button className="ml-2">
-                        Sign Up
-                    </button>
-                </p>
-              </Link>
+              <span>Error</span>
+              {errors.error}
             </div>
+          )}
 
-            <div className="display-center p-3">
-              <button
-                className="sign-in--google primary-bg"
-                onClick={(event) => signInWithProvider(event, "google")}
-              >
+          <Form className="px-4" noValidate={true}>
+            <Form.Group as={Row} className="mb-3" controlId="formPlaintextEmail">
+              <Form.Label column sm="2">Email</Form.Label>
+              <Col sm="10">
+                <input
+                  required
+                  id="email"
+                  className="form-control"
+                  label={errors.email.length < 1 ? "Email Address" : "Email ERROR"}
+                  name="email"
+                  autoComplete="email"
+                  autoFocus
+                  type="email"
+                  onChange={(e) => setEmail(e.target.value)}
+                  error={errors.email.length > 0 ? errors.email : ''}
+                />
+              </Col>
+            </Form.Group>
+
+            <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
+              <Form.Label column sm="2">
+                Password
+              </Form.Label>
+              <Col sm="10">
+                <input
+                  required
+                  name="password"
+                  className="form-control"
+                  label={errors.password.length < 1 ? "Password" : "Password ERROR"}
+                  id="password"
+                  autoComplete="current-password"
+                  type="password"
+                  onChange={(e) => setPassword(e.target.value)}
+                  error={errors.password.length > 0 ? errors.password : ''}
+                />
+              </Col>
+            </Form.Group>
+
+            <Form.Group as={Row} className="mb-3">
+              <Form.Label column sm="12" className="text-center">
+                Remember Me
+                <input type="checkbox" value="remember" id="rememberMe" color="primary" />
+              </Form.Label>
+            </Form.Group>
+
+            <Form.Group as={Row} className="mb-3">
+              <Form.Label column sm="6" className="text-center">
+                <Link to="/forgot-password" variant="body2">
+                  <p>Forgot Password?</p>
+                </Link>
+              </Form.Label>
+              <Form.Label column sm="6" className="text-center">
+                <Link to="/sign-up">
+                  <p className="display-center">Don&apos;t have an account?</p>
+                </Link>
+              </Form.Label>
+            </Form.Group>
+
+            <button
+              type="submit"
+              className="btn btn-lg btn-success"
+              onClick={(event) => signInWithProvider(event, "email")}>
+                Sign In
+            </button>
+
+            <hr/>
+            
+
+            <button
+              className="btn btn-lg btn-danger"
+              onClick={(event) => signInWithProvider(event, "google")}>
                 <i className="fa fa-google" aria-hidden="true"></i>
-
-                <span className="pl-1">
-                  Login with Google
-                </span>
-              </button>
-            </div>
-          </div>
-        </form>
-      </div>
-
-      <Copyright />
-    </div>
+                Login with Google
+            </button>
+          </Form>
+        </div>
+      </Row>
+    </Container>
   );
 }
 

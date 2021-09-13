@@ -2,17 +2,17 @@ import React, { useEffect, useState } from 'react'
 import './HeaderBar.css'
 import { Link } from "react-router-dom";
 import { FaPaw, FaRegCalendarAlt } from "react-icons/fa";
-import { FiLogOut } from "react-icons/fi";
+import { FiLogOut, FiLogIn } from "react-icons/fi";
 import { AiOutlineUser, AiFillPlusCircle } from "react-icons/ai";
+import { useSelector } from "react-redux";
 
 const HeaderBar = () => {
-
-    let pathname = window.location.pathname
-
-    const [path, setPath] = useState('/')
+    let pathname = window.location.pathname;
+    const [path, setPath] = useState('/');
+    const auth = useSelector((state) => state.firebase.auth);
 
     useEffect(() => {
-        setPath(pathname)
+        setPath(pathname);
     }, [path])
 
     return (
@@ -39,22 +39,32 @@ const HeaderBar = () => {
                         <p className={pathname === '/new-event' ? 'Mobile-nav-elm__text black' : 'Mobile-nav-elm__text'}>New Event</p>
                     </div>
                 </Link>
-                <Link to='/login'>
-                    <div onClick={() => setPath('/login')} className={pathname === '/login' ? 'Mobile-nav-elm border-orange black' : 'Mobile-nav-elm'}>
-                        <p className={pathname === '/login' ? 'Mobile-nav-elm__icon black' : 'Mobile-nav-elm__icon'}><FiLogOut /></p>
-                        <p className={pathname === '/login' ? 'Mobile-nav-elm__text black' : 'Mobile-nav-elm__text'}>Logout</p>
-                    </div>
-                </Link>
+                {(auth.isEmpty) ? (
+                    <Link to='/sign-in'>
+                        <div onClick={() => setPath('/sign-in')} className={pathname === '/sign-in' ? 'Mobile-nav-elm border-orange black' : 'Mobile-nav-elm'}>
+                            <p className={pathname === '/sign-in' ? 'Mobile-nav-elm__icon black' : 'Mobile-nav-elm__icon'}><FiLogIn /></p>
+                            <p className={pathname === '/sign-in' ? 'Mobile-nav-elm__text black' : 'Mobile-nav-elm__text'}>Sign-In</p>
+                        </div>
+                    </Link>
+                ) : (
+                    <Link to='/sign-in'>
+                        <div onClick={() => setPath('/sign-in')} className={pathname === '/sign-in' ? 'Mobile-nav-elm border-orange black' : 'Mobile-nav-elm'}>
+                            <p className={pathname === '/sign-in' ? 'Mobile-nav-elm__icon black' : 'Mobile-nav-elm__icon'}><FiLogOut /></p>
+                            <p className={pathname === '/sign-in' ? 'Mobile-nav-elm__text black' : 'Mobile-nav-elm__text'}>Sign-Out</p>
+                        </div>
+                    </Link>
+                )}
+                {(!auth.isEmpty) && (
                 <Link to='/profile'>
                     <div onClick={() => setPath('/profile')} className={pathname === '/profile' ? 'Mobile-nav-elm border-orange black' : 'Mobile-nav-elm'}>
                         <p className={pathname === '/profile' ? 'Mobile-nav-elm__icon black' : 'Mobile-nav-elm__icon'}><AiOutlineUser /></p>
                         <p className={pathname === '/profile' ? 'Mobile-nav-elm__text black' : 'Mobile-nav-elm__text'}>Profile</p>
                     </div>
                 </Link>
-
+                )}
             </div >
         </div >
     )
 }
 
-export default HeaderBar
+export default HeaderBar;

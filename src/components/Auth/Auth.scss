@@ -42,3 +42,19 @@
 
   }
 }
+
+.login {
+  width: 30% !important;
+  margin: 2% auto;
+  padding-top: 10%;
+  
+  #rememberMe {
+    margin-left: 10px; 
+    top: 3px;
+    position: relative;
+  }
+
+  .btn-success, .btn-danger {
+    width: 100%;
+  }
+}
