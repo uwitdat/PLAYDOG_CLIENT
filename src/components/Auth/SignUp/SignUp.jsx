@@ -1,43 +1,10 @@
 import React, { useState } from 'react';
-import {
-  Avatar,
-  Button,
-  CssBaseline,
-  TextField,
-  Grid,
-  Box,
-  Typography,
-  Container,
-} from '@material-ui/core';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import { makeStyles } from '@material-ui/core/styles';
 import Copyright from 'components/Copyright/Copyright';
 import { useFirebase } from "react-redux-firebase";
 import { useHistory, Link } from "react-router-dom";
 import "../Auth.scss";
 
-const useStyles = makeStyles((theme) => ({
-  paper: {
-    marginTop: theme.spacing(8),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
-  },
-  form: {
-    width: '100%', // Fix IE 11 issue.
-    marginTop: theme.spacing(3),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
-}));
-
 export default function SignUp() {
-  const classes = useStyles();
   const firebase = useFirebase();
   const history = useHistory();
   const [email, setEmail] = useState("");
@@ -124,24 +91,20 @@ export default function SignUp() {
   };
 
   return (
-    <Container component="main" maxWidth="xs">
-      <CssBaseline />
-      <div className={classes.paper}>
-        <Avatar className="lock-icon">
+    <div component="main" maxWidth="xs">
+      <div>
+        {/* <Avatar className="lock-icon">
           <LockOutlinedIcon />
-        </Avatar>
+        </Avatar> */}
+        LOCK ICON
 
-        <Typography component="h1" variant="h5">
+        <h5>
           Sign up
-        </Typography>
+        </h5>
 
-        <form className={classes.form} noValidate>
+        <form noValidate>
           <fieldset>
-            <TextField
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
+            <input
                 id="email"
                 label={errors.email.length < 1 ? "Email Address" : "Email ERROR"}
                 helperText={errors.email.length > 0 && errors.email}
@@ -155,11 +118,7 @@ export default function SignUp() {
           </fieldset>
 
           <fieldset>
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
+            <input
               name="password"
               label={errors.password.length < 1 ? "Password" : "Password ERROR"}
               helperText={errors.password.length > 0 && errors.password}
@@ -171,7 +130,7 @@ export default function SignUp() {
             />
           </fieldset>
 
-          <Button
+          <button
             type="submit"
             fullWidth
             variant="contained"
@@ -179,29 +138,27 @@ export default function SignUp() {
             onClick={(event) => signInWithProvider(event, "email")}
           >
             Sign Up
-          </Button>
+          </button>
 
-          <Grid container justifyContent="flex-end">
-            <Grid item>
+          <div container justifyContent="flex-end">
+            <div item>
               <Link to="/sign-in">
-                <Typography
-                  component="p"
-                  variant="subtitle1"
+                <p
                   className="display-center"
                 >
                   Already have an account?
-                  <Button
+                  <button
                     variant="text"
                     color="primary"
                     className="ml-2">
                       Sign In
-                  </Button>
-                </Typography>
+                  </button>
+                </p>
               </Link>
-            </Grid>
+            </div>
 
-          <Grid item xs={12} className="display-center mt-2">
-              <Button
+          <div item xs={12} className="display-center mt-2">
+              <button
                 variant="contained"
                 className="sign-in--google primary-bg"
                 onClick={(event) => signInWithProvider(event, "google")}
@@ -211,15 +168,13 @@ export default function SignUp() {
                 <span className="pl-1">
                   Sign Up with Google
                 </span>
-              </Button>
-            </Grid>
-          </Grid>
+              </button>
+            </div>
+          </div>
         </form>
       </div>
 
-      <Box mt={5}>
-        <Copyright />
-      </Box>
-    </Container>
+      <Copyright />
+    </div>
   );
 }
