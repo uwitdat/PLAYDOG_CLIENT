@@ -3,8 +3,6 @@ import {
   BrowserRouter as Router,
   Route, Switch
 } from "react-router-dom";
-import HeaderBar from './components/HeaderBar/HeaderBar';
-import FooterBar from './components/FooterBar/FooterBar';
 import HomePage from './components/pages/HomePage/HomePage';
 import EventsPage from './components/pages/EventsPage/EventsPage';
 import DogsPage from './components/pages/DogsPage/DogsPage';
@@ -53,7 +51,6 @@ function App() {
         ))}
 
         <Route path="/welcome" component={LandingPage} />
-
       </div>
     </Router>
   );
