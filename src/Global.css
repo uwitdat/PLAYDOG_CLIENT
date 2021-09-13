@@ -23,3 +23,7 @@ h1 {
   font-family: var(--font-title);
   font-size: 4rem;
 }
+
+a {
+  text-decoration: none;
+}
