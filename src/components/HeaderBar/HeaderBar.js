@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import './HeaderBar.css'
-import { Link } from "react-router-dom";
 import { FaPaw, FaRegCalendarAlt } from "react-icons/fa";
 import { FiLogOut } from "react-icons/fi";
 import { AiOutlineUser, AiFillPlusCircle } from "react-icons/ai";
+import { useFirebase } from 'react-redux-firebase';
+import { useHistory, Link } from "react-router-dom";
 
 const HeaderBar = () => {
-
+    const firebase = useFirebase();
+    const history = useHistory();
     let pathname = window.location.pathname
 
     const [path, setPath] = useState('/')
@@ -14,6 +16,21 @@ const HeaderBar = () => {
     useEffect(() => {
         setPath(pathname)
     }, [path])
+
+    const signOut = () => {
+        firebase
+          .auth()
+          .signOut()
+          .then(function () {
+            // Sign-out successful.
+            console.log("signed out");
+            history.push("/sign-in");
+          })
+          .catch(function (error) {
+            // An error happened.
+            console.log(error);
+          });
+      };
 
     return (
         <div className='HeaderBar'>
@@ -39,12 +56,12 @@ const HeaderBar = () => {
                         <p className={pathname === '/new-event' ? 'Mobile-nav-elm__text black' : 'Mobile-nav-elm__text'}>New Event</p>
                     </div>
                 </Link>
-                <Link to='/login'>
-                    <div onClick={() => setPath('/login')} className={pathname === '/login' ? 'Mobile-nav-elm border-orange black' : 'Mobile-nav-elm'}>
-                        <p className={pathname === '/login' ? 'Mobile-nav-elm__icon black' : 'Mobile-nav-elm__icon'}><FiLogOut /></p>
-                        <p className={pathname === '/login' ? 'Mobile-nav-elm__text black' : 'Mobile-nav-elm__text'}>Logout</p>
-                    </div>
-                </Link>
+                {/* <Link to='/login'> */}
+                <div onClick={signOut} className={pathname === '/login' ? 'Mobile-nav-elm border-orange black' : 'Mobile-nav-elm'}>
+                    <p className={pathname === '/login' ? 'Mobile-nav-elm__icon black' : 'Mobile-nav-elm__icon'}><FiLogOut /></p>
+                    <p className={pathname === '/login' ? 'Mobile-nav-elm__text black' : 'Mobile-nav-elm__text'}>Logout</p>
+                </div>
+                {/* </Link> */}
                 <Link to='/profile'>
                     <div onClick={() => setPath('/profile')} className={pathname === '/profile' ? 'Mobile-nav-elm border-orange black' : 'Mobile-nav-elm'}>
                         <p className={pathname === '/profile' ? 'Mobile-nav-elm__icon black' : 'Mobile-nav-elm__icon'}><AiOutlineUser /></p>
