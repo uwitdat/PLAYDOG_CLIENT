@@ -11380,11 +11380,6 @@ section {
   height: 93.6288088643%;
 }
 
-.device[data-device=iPhoneX][data-orientation=portrait][data-color=black]::after {
-  content: "";
-  /* background-image: url(/public/assets/portrait_black.png); */
-}
-
 .device[data-device=iPhoneX][data-orientation=portrait][data-color=black] .button {
   display: none;
   top: 0%;
