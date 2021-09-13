@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/PLAYDOG_CLIENT/static/css/main.b0f325f1.chunk.css",
+    "main.js": "/PLAYDOG_CLIENT/static/js/main.a4126009.chunk.js",
+    "main.js.map": "/PLAYDOG_CLIENT/static/js/main.a4126009.chunk.js.map",
+    "runtime-main.js": "/PLAYDOG_CLIENT/static/js/runtime-main.27ed33e6.js",
+    "runtime-main.js.map": "/PLAYDOG_CLIENT/static/js/runtime-main.27ed33e6.js.map",
+    "static/js/2.87f0263b.chunk.js": "/PLAYDOG_CLIENT/static/js/2.87f0263b.chunk.js",
+    "static/js/2.87f0263b.chunk.js.map": "/PLAYDOG_CLIENT/static/js/2.87f0263b.chunk.js.map",
+    "index.html": "/PLAYDOG_CLIENT/index.html",
+    "static/css/main.b0f325f1.chunk.css.map": "/PLAYDOG_CLIENT/static/css/main.b0f325f1.chunk.css.map",
+    "static/js/2.87f0263b.chunk.js.LICENSE.txt": "/PLAYDOG_CLIENT/static/js/2.87f0263b.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.27ed33e6.js",
+    "static/js/2.87f0263b.chunk.js",
+    "static/css/main.b0f325f1.chunk.css",
+    "static/js/main.a4126009.chunk.js"
+  ]
+}
