@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from "react-router-dom";
 import './FooterBar.css'
 import { FaPaw, FaRegCalendarAlt } from "react-icons/fa";
@@ -12,13 +12,23 @@ const linkStyle = {
 }
 
 const FooterBar = () => {
+    let pathname = window.location.pathname
+
+    const [path, setPath] = useState('/home')
+
+    useEffect(() => {
+        setPath(pathname)
+    }, [path])
+
+
+
     return (
         <div className='FooterBar'>
-            <Link to='/' style={linkStyle}><span className='FooterBar__icon'><AiFillHome /></span></Link>
-            <Link to='/events' style={linkStyle}><span className='FooterBar__icon'><FaRegCalendarAlt /></span></Link>
+            <Link to='/' style={linkStyle}><span onClick={() => setPath('/')} className={path === '/' ? 'FooterBar__icon active' : 'FooterBar__icon'}><AiFillHome /></span></Link>
+            <Link to='/events' style={linkStyle}><span onClick={() => setPath('/events')} className={path === '/events' ? 'FooterBar__icon active' : 'FooterBar__icon'}><FaRegCalendarAlt /></span></Link>
             <Link to='/new-event' style={linkStyle}><span className='FooterBar__icon lrg'><AiFillPlusCircle /></span></Link>
-            <Link to='/dogs' style={linkStyle}><span className='FooterBar__icon'><FaPaw /></span></Link>
-            <Link to='/login' style={linkStyle}><span className='FooterBar__icon'><FiLogOut /></span></Link>
+            <Link to='/dogs' style={linkStyle}><span onClick={() => setPath('/dogs')} className={path === '/dogs' ? 'FooterBar__icon active' : 'FooterBar__icon'}><FaPaw /></span></Link>
+            <Link to='/login' style={linkStyle}><span onClick={() => setPath('/login')} className='FooterBar__icon'><FiLogOut /></span></Link>
         </div>
     )
 }
