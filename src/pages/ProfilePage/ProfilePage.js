@@ -3,14 +3,11 @@ import { useSelector } from 'react-redux'
 import './ProfilePage.css'
 
 const ProfilePage = () => {
-  const auth = useSelector((state) => state.firebase.auth);
-
-  useEffect(() => {
-    
-  }, []);
+  const { auth, profile } = useSelector((state) => state.firebase);
+  
+  useEffect(() => {}, []);
 
   const getDate = (dateCode) => {
-    console.log("DateCode: ", dateCode);
     return dateCode ? (new Date(parseInt(dateCode))).toDateString() : ""; 
   }
 
@@ -22,10 +19,10 @@ const ProfilePage = () => {
           <div className="panel panel-default">
             <div className="panel-body">
               <div className="profile__avatar">
-                <img src={auth.photoURL} alt="avater" />
+                <img src={profile.avatarUrl} alt="avater" />
               </div>
               <div className="profile__header">
-                <h4>{auth.displayName}</h4>
+                <h4>{profile.displayName}</h4>
                 <p>{auth.email}</p>
                 <p>Last Logged In: {getDate(auth.lastLoginAt)}</p>
               </div>
@@ -34,55 +31,7 @@ const ProfilePage = () => {
 
           <div className="panel panel-default">
             <div className="panel-heading">
-            <h4 className="panel-title">User info</h4>
-            </div>
-            <div className="panel-body">
-              <table className="table profile__table">
-                <tbody>
-                  <tr>
-                    <th><strong>Location</strong></th>
-                    <td>{auth.country}</td>
-                  </tr>
-                  <tr>
-                    <th><strong>Company name</strong></th>
-                    <td>Simpleqode.com</td>
-                  </tr>
-                  <tr>
-                    <th><strong>Position</strong></th>
-                    <td>Front-end developer</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-
-          <div className="panel panel-default">
-            <div className="panel-heading">
-            <h4 className="panel-title">Community</h4>
-            </div>
-            <div className="panel-body">
-              <table className="table profile__table">
-                <tbody>
-                  <tr>
-                    <th><strong>Comments</strong></th>
-                    <td>58584</td>
-                  </tr>
-                  <tr>
-                    <th><strong>Member since</strong></th>
-                    <td>Jan 01, 2016</td>
-                  </tr>
-                  <tr>
-                    <th><strong>Last login</strong></th>
-                    <td>1 day ago</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-
-          <div className="panel panel-default">
-            <div className="panel-heading">
-            <h4 className="panel-title">Latest posts</h4>
+            <h4 className="panel-title">Pets</h4>
             </div>
             <div className="panel-body">
               <div className="profile__comments">
@@ -152,8 +101,8 @@ const ProfilePage = () => {
                 <i className="fa fa-phone"></i>
               </div>
               <div className="profile__contact-info-body">
-                <h5 className="profile__contact-info-heading">Work number</h5>
-                (000)987-65-43
+                <h5 className="profile__contact-info-heading">Country</h5>
+                {auth.country}
               </div>
             </div>
             <div className="profile__contact-info-item">
@@ -161,8 +110,8 @@ const ProfilePage = () => {
                 <i className="fa fa-phone"></i>
               </div>
               <div className="profile__contact-info-body">
-                <h5 className="profile__contact-info-heading">Mobile number</h5>
-                (000)987-65-43
+                <h5 className="profile__contact-info-heading">Phone Number</h5>
+                {profile.phoneNumber}
               </div>
             </div>
             <div className="profile__contact-info-item">
@@ -170,17 +119,8 @@ const ProfilePage = () => {
                 <i className="fa fa-envelope-square"></i>
               </div>
               <div className="profile__contact-info-body">
-                <h5 className="profile__contact-info-heading">E-mail address</h5>
-                <a href="mailto:admin@domain.com">admin@domain.com</a>
-              </div>
-            </div>
-            <div className="profile__contact-info-item">
-              <div className="profile__contact-info-icon">
-                <i className="fa fa-map-marker"></i>
-              </div>
-              <div className="profile__contact-info-body">
-                <h5 className="profile__contact-info-heading">Work address</h5>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                <h5 className="profile__contact-info-heading">Verified</h5>
+                {profile.isVerified}
               </div>
             </div>
           </div>
