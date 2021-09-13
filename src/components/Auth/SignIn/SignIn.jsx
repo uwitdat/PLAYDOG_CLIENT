@@ -1,40 +1,11 @@
 import React, { useState } from 'react';
-import {
-  Avatar,
-  Button,
-  CssBaseline,
-  TextField,
-  FormControlLabel,
-  Grid,
-  Box,
-  Typography,
-  Container,
-  Checkbox
-} from '@material-ui/core';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import { makeStyles } from '@material-ui/core/styles';
 import { useFirebase } from "react-redux-firebase";
 import { useHistory, Link } from "react-router-dom";
 // import Notifications from "../../General/Notifications/Notifications";
 import "../Auth.scss";
 import Copyright from 'components/Copyright/Copyright';
-import { Alert, AlertTitle } from '@material-ui/lab';
-
-const useStyles = makeStyles((theme) => ({
-  paper: {
-    marginTop: theme.spacing(8),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-  form: {
-    width: '100%', // Fix IE 11 issue.
-    marginTop: theme.spacing(1),
-  }
-}));
 
 export default function SignIn() {
-  const classes = useStyles();
   const firebase = useFirebase();
   const history = useHistory();
   const [email, setEmail] = useState("");
@@ -90,31 +61,28 @@ export default function SignIn() {
   };
 
   return (
-    <Container component="main" maxWidth="xs">
-      <CssBaseline />
-      <div className={classes.paper}>
-        <Avatar className="lock-icon">
+    <div>
+      <div>
+        {/* <Avatar className="lock-icon">
           <LockOutlinedIcon />
-        </Avatar>
+        </Avatar> */}
+        LOCK ICON
 
-        <Typography component="h1" variant="h5">
+        <h5>
           Sign in
-        </Typography>
+        </h5>
 
         {errors.error.length > 0 && (
-        <Alert severity="error" className="mt-2">
-          <AlertTitle>Error</AlertTitle>
+        <div severity="error" className="mt-2">
+          <span>Error</span>
           {errors.error}
-        </Alert>
+        </div>
         )}
 
-        <form className={classes.form} noValidate>
+        <form noValidate>
           <fieldset>
-            <TextField
-              variant="outlined"
-              margin="normal"
+            <input
               required
-              fullWidth
               id="email"
               label={errors.email.length < 1 ? "Email Address" : "Email ERROR"}
               helperText={errors.email.length > 0 && errors.email}
@@ -128,11 +96,8 @@ export default function SignIn() {
           </fieldset>
 
           <fieldset>
-            <TextField
-              variant="outlined"
-              margin="normal"
+            <input
               required
-              fullWidth
               name="password"
               label={errors.password.length < 1 ? "Password" : "Password ERROR"}
               helperText={errors.password.length > 0 && errors.password}
@@ -144,12 +109,13 @@ export default function SignIn() {
             />
           </fieldset>
 
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
-          />
+          <label htmlFor="checkbox">
+            Remember Me
+          </label>
 
-          <Button
+          <input type="checkbox" value="remember" color="primary" />
+
+          <button
             type="submit"
             fullWidth
             variant="contained"
@@ -157,46 +123,42 @@ export default function SignIn() {
             onClick={(event) => signInWithProvider(event, "email")}
           >
             Sign In
-          </Button>
+          </button>
 
 
-          <Grid container>
-            <Grid
+          <div container>
+            <div
               item
               xs={12}
             >
               <Link to="/forgot-password" variant="body2">
-                <Typography component="p" variant="subtitle1">
+                <p>
                     Forgot Password?
-                </Typography>
+                </p>
               </Link>
-            </Grid>
+            </div>
 
-            <Grid
+            <div
               item
               xs={12}
               className="mt-2"
             >
               <Link to="/sign-up">
-                <Typography
-                  component="p"
-                  variant="subtitle1"
+                <p
                   className="display-center"
                 >
                     Don&apos;t have an account?
-                    <Button
-                      variant="text"
+                    <button
                       color="primary"
                       className="ml-2">
                         Sign Up
-                    </Button>
-                </Typography>
+                    </button>
+                </p>
               </Link>
-            </Grid>
+            </div>
 
-            <Grid item xs={12} className="display-center p-3">
-              <Button
-                variant="contained"
+            <div item xs={12} className="display-center p-3">
+              <button
                 className="sign-in--google primary-bg"
                 onClick={(event) => signInWithProvider(event, "google")}
               >
@@ -205,15 +167,13 @@ export default function SignIn() {
                 <span className="pl-1">
                   Login with Google
                 </span>
-              </Button>
-            </Grid>
-          </Grid>
+              </button>
+            </div>
+          </div>
         </form>
       </div>
 
-      <Box mt={8}>
-        <Copyright />
-      </Box>
-    </Container>
+      <Copyright />
+    </div>
   );
 }

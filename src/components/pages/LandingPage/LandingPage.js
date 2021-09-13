@@ -46,7 +46,7 @@ const LandingPage = () => {
 											</div>
 											<div className="col-lg-6">
 												<div className="masthead-device-mockup">
-													
+
 												</div>
 											</div>
 									</div>
@@ -103,7 +103,7 @@ const LandingPage = () => {
 											</div>
 											<div className="col-lg-4 order-lg-0">
 													<div className="features-device-mockup">
-															
+
 													</div>
 											</div>
 									</div>
@@ -199,7 +199,7 @@ const LandingPage = () => {
 					<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
 					<script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
 				</div>
-			</div>	
+			</div>
 	)
 }
 
