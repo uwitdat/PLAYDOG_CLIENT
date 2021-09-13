@@ -13,13 +13,9 @@ import LoginPage from './components/pages/LoginPage/LoginPage';
 import LandingPage from './components/pages/LandingPage/LandingPage';
 
 function App() {
-<<<<<<< HEAD
   let path = window.location.pathname;
 
 
-=======
-  console.log(window.location.pathname)
->>>>>>> bens-branch
   return (
     <Router>
       <div className="App">
@@ -34,7 +30,7 @@ function App() {
             <FooterBar />
           </>
         ))}
-        
+
         <Route path="/welcome" component={LandingPage} />
 
       </div>
