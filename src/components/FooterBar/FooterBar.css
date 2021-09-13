@@ -4,18 +4,37 @@
   bottom: 0;
   width: 100%;
   height: 5.5rem;
-  display: flex;
+  display: none;
   justify-content: space-evenly;
   align-items: center;
+}
+
+@media only screen and (max-width: 700px) {
+  .FooterBar {
+    display: flex;
+  }
 }
 
 .FooterBar__icon {
   font-size: 2.8rem;
   color: var(--color-grey-dark);
+  transition: all 200ms;
+  transform: skewY(20deg);
 }
 
 .lrg {
   font-size: 4.6rem;
   color: var(--color-orange);
   margin-top: 5rem;
+}
+
+.active {
+  color: black;
+  border-top: 3px solid black;
+  padding-top: 1.7rem;
+}
+
+.rotate {
+  transform: rotate(30deg);
+  transition: all 200ms;
 }
