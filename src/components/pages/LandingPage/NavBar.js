@@ -3,7 +3,7 @@ import React from 'react'
 import './LandingPage.css'
 import { Navbar, Container, Nav } from 'react-bootstrap';
 
-const NavBar = () => {
+const NavBar = ({state}) => {
 	return (
 		<div>
 			<Navbar className="shadow-sm" id="mainNav" collapseOnSelect expand="lg" bg="light" variant="light" fixed="top">

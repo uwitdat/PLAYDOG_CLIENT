@@ -19,8 +19,6 @@ import HeaderBar from 'components/HeaderBar/HeaderBar';
 import FooterBar from 'components/FooterBar/FooterBar';
 
 function App() {
-  let path = window.location.pathname;
-
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -35,23 +33,21 @@ function App() {
   return (
     <Router>
       <div className="App">
-        {(!path.includes("/welcome") && (
-          <>
-            <HeaderBar />
-            <Switch>
-              <Route path='/' exact component={HomePage} />
-              <Route path='/events' component={EventsPage} />
-              <Route path='/dogs' component={DogsPage} />
-              <Route path='/new-event' component={NewEventPage} />
-              <Route path='/login' component={LoginPage} />
-              <Route path="/welcome" component={LandingPage} />
-              <Route exact path="/sign-in" component={SignIn} />
-              <Route exact path="/sign-up" component={SignUp} />
-              <Route exact path="/forgot-password" component={ForgotPassword} />
-            </Switch>
-            <FooterBar />
-          </>
-        ))}
+        <>
+          <HeaderBar />
+          <Switch>
+            <Route path='/' exact component={HomePage} />
+            <Route path='/events' component={EventsPage} />
+            <Route path='/dogs' component={DogsPage} />
+            <Route path='/new-event' component={NewEventPage} />
+            <Route path='/login' component={LoginPage} />
+            <Route path="/welcome" component={LandingPage} />
+            <Route exact path="/sign-in" component={SignIn} />
+            <Route exact path="/sign-up" component={SignUp} />
+            <Route exact path="/forgot-password" component={ForgotPassword} />
+          </Switch>
+          <FooterBar />
+        </>
       </div>
     </Router>
   )

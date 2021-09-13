@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import ErrorBoundary from "components/ErrorBoundary";
 import { BrowserRouter } from "react-router-dom";
-import unregister from "./registerServiceWorker";
+// import unregister from "./registerServiceWorker";
 
 import { ReactReduxFirebaseProvider } from "react-redux-firebase";
 import { createFirestoreInstance } from "redux-firestore";
@@ -31,7 +31,7 @@ const rrfProps = {
 ReactDOM.render(
   <Provider store={store}>
     <ReactReduxFirebaseProvider {...rrfProps}>
-      <BrowserRouter basename="/Walki">
+      <BrowserRouter basename="/welcome">
         <ErrorBoundary>
           <App />
         </ErrorBoundary>
@@ -45,4 +45,4 @@ ReactDOM.render(
  * Be aware that the website will only update to the latest version on the 2nd page visit if it as already cached
  * Learn more about service workers in React: https://create-react-app.dev/docs/making-a-progressive-web-app
  */
-unregister();
+// unregister();

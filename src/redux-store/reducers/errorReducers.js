@@ -3,7 +3,8 @@ const initialState = {
   errors: {}
 };
 
-export default function(state = initialState, action) {
+// eslint-disable-next-line
+export default function(state = initialState, action) {  
   switch (action.type) {
     case GET_ERRORS:
       return state;
