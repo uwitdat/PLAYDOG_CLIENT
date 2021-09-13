@@ -1,0 +1,44 @@
+.sign-in {
+  &--email {
+    margin: 2em 0 !important;
+
+    &, * {
+      color: #fff;
+      font-weight: 700;
+    }
+  }
+
+  &--google {
+    padding: 1em 2em !important;
+    font-size: 17px !important;
+
+    &, * {
+      color: #fff;
+      font-weight: 700;
+    }
+
+    i {
+      font-size: 1.5em;
+    }
+  }
+}
+
+.lock-icon {
+  margin: 8px;
+  background-color: #f31919 !important;
+}
+
+.forgot-password {
+    &--email {
+    margin-top: 2em !important;
+
+    &, * {
+      color: #fff;
+      font-weight: 700;
+    }
+  }
+
+  &--back-to-sign-in {
+
+  }
+}
