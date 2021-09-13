@@ -28,13 +28,12 @@ function App() {
 
     return () => window.removeEventListener('resize', () => dispatch({ type: SET_WINDOW_WIDTH }))
     // eslint-disable-next-line
-  },[])
+  }, [])
 
   return (
     <Router>
       <div className="App">
         <>
-          <HeaderBar />
           <Switch>
             <Route path='/' exact component={HomePage} />
             <Route path='/events' component={EventsPage} />
@@ -46,7 +45,6 @@ function App() {
             <Route exact path="/sign-up" component={SignUp} />
             <Route exact path="/forgot-password" component={ForgotPassword} />
           </Switch>
-          <FooterBar />
         </>
       </div>
     </Router>
