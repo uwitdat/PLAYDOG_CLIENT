@@ -23,7 +23,7 @@ const HeaderBar = () => {
             <div className='Mobile-nav'>
                 <Link to='/dogs'>
                     <div onClick={() => setPath('/dogs')} className={pathname === '/dogs' ? 'Mobile-nav-elm border-orange' : 'Mobile-nav-elm'}>
-                        <p className={pathname === '/dogs' ? 'Mobile-nav-elm__icon black' : 'Mobile-nav-elm__icon'}><FaPaw /></p>
+                        <p className={pathname === '/dogs' ? 'Mobile-nav-elm__icon black' : 'Mobile-nav-elm__icon'}><FaPaw className={pathname === '/dogs' ? 'rotate' : null} /></p>
                         <p className={pathname === '/dogs' ? 'Mobile-nav-elm__text black' : 'Mobile-nav-elm__text'}>View Dogs</p>
                     </div>
                 </Link>
