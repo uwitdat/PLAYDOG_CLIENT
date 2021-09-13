@@ -3,19 +3,20 @@ import {
   BrowserRouter as Router,
   Route, Switch
 } from "react-router-dom";
-import HomePage from 'pages/HomePage/HomePage';
-import EventsPage from 'pages/EventsPage/EventsPage';
-import DogsPage from 'pages/DogsPage/DogsPage';
-import NewEventPage from 'pages/NewEventPage/NewEventPage';
-import LoginPage from 'pages/LoginPage/LoginPage';
-import LandingPage from 'pages/LandingPage/LandingPage';
+import HomePage from './components/pages/HomePage/HomePage';
+import EventsPage from './components/pages/EventsPage/EventsPage';
+import DogsPage from './components/pages/DogsPage/DogsPage';
+import NewEventPage from './components/pages/NewEventPage/NewEventPage';
+import LoginPage from './components/pages/LoginPage/LoginPage';
+import LandingPage from './components/pages/LandingPage/LandingPage';
 import SignIn from "components/Auth/SignIn/SignIn";
-import SignUp from "components/Auth/SignUp/SignUp";
+import SignUp from "./components/Auth/SignUp/SignUp";
 import ForgotPassword from "components/Auth/ForgotPassword/ForgotPassword";
 import { SET_WINDOW_WIDTH } from "redux-store/types";
 import { connect, useDispatch } from "react-redux";
 import { useEffect } from 'react';
-
+import HeaderBar from 'components/HeaderBar/HeaderBar';
+import FooterBar from 'components/FooterBar/FooterBar';
 
 function App() {
   const dispatch = useDispatch()
@@ -33,7 +34,6 @@ function App() {
     <Router>
       <div className="App">
         <>
-
           <Switch>
             <Route path='/' exact component={HomePage} />
             <Route path='/events' component={EventsPage} />
@@ -45,11 +45,10 @@ function App() {
             <Route exact path="/sign-up" component={SignUp} />
             <Route exact path="/forgot-password" component={ForgotPassword} />
           </Switch>
-
         </>
       </div>
     </Router>
-  );
+  )
 }
 
 App.propTypes = {
