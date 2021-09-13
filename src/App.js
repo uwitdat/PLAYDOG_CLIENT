@@ -12,6 +12,7 @@ import NewEventPage from './components/pages/NewEventPage/NewEventPage'
 import LoginPage from './components/pages/LoginPage/LoginPage'
 
 function App() {
+  console.log(window.location.pathname)
   return (
     <Router>
       <div className="App">

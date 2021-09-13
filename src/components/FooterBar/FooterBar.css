@@ -22,4 +22,6 @@
 
 .active {
   color: black;
+  border-top: 3px solid black;
+  padding-top: 1.7rem;
 }
