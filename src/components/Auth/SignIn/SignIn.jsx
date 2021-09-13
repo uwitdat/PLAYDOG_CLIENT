@@ -4,8 +4,9 @@ import { useHistory, Link } from "react-router-dom";
 // import Notifications from "../../General/Notifications/Notifications";
 import "../Auth.scss";
 import Copyright from 'components/Copyright/Copyright';
+import { connect } from 'react-redux';
 
-export default function SignIn() {
+function SignIn({responsive}) {
   const firebase = useFirebase();
   const history = useHistory();
   const [email, setEmail] = useState("");
@@ -177,3 +178,14 @@ export default function SignIn() {
     </div>
   );
 }
+
+SignIn.propTypes = {
+}
+
+const mapStateToProps = (state) => {
+  return {
+    responsive: state.responsive
+  }
+};
+
+export default connect(mapStateToProps, {})(SignIn);
