@@ -10,6 +10,7 @@
 
 .HeaderBar__title {
   color: var(--color-orange);
+  font-family: var(--font-title);
   margin-left: 1rem;
   letter-spacing: 1px;
   text-shadow: -2px 2px 0px #00e6e6, -5px 5px 0px #01cccc;

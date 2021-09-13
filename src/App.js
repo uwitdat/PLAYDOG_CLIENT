@@ -15,8 +15,7 @@ import ForgotPassword from "components/Auth/ForgotPassword/ForgotPassword";
 import { SET_WINDOW_WIDTH } from "redux-store/types";
 import { connect, useDispatch } from "react-redux";
 import { useEffect } from 'react';
-import HeaderBar from 'components/HeaderBar/HeaderBar';
-import FooterBar from 'components/FooterBar/FooterBar';
+
 
 function App() {
   const dispatch = useDispatch()
@@ -34,7 +33,7 @@ function App() {
     <Router>
       <div className="App">
         <>
-          <HeaderBar />
+
           <Switch>
             <Route path='/' exact component={HomePage} />
             <Route path='/events' component={EventsPage} />
@@ -46,7 +45,7 @@ function App() {
             <Route exact path="/sign-up" component={SignUp} />
             <Route exact path="/forgot-password" component={ForgotPassword} />
           </Switch>
-          <FooterBar />
+
         </>
       </div>
     </Router>
