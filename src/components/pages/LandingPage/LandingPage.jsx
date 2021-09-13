@@ -1,13 +1,14 @@
 import React from 'react'
+import { connect } from 'react-redux';
 import './LandingPage.css'
 import NavBar from './NavBar';
 
-const LandingPage = () => {
+function LandingPage(state){
 	return (
 		<div>
 				<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
 				<div id="page-top">
-					<NavBar/>
+					<NavBar state={state} />
 
 					<header className="masthead">
 							<div className="container px-5">
@@ -179,10 +180,16 @@ const LandingPage = () => {
 							</div>
 					</div>
 					<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
-					<script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
 				</div>
 			</div>
 	)
 }
 
-export default LandingPage;
+LandingPage.propTypes = {
+}
+
+const mapStateToProps = (state) => {
+  return state;
+};
+
+export default connect(mapStateToProps, {})(LandingPage);

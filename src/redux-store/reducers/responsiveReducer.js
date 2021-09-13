@@ -5,7 +5,6 @@ const initialState = {
   screenSize: 'wide',
   isMobile: false
 };
-
 // eslint-disable-next-line
 export default function(state = initialState, action) {
   const setScreenSize = () => {
