@@ -7,7 +7,7 @@ import EventsPage from 'pages/EventsPage/EventsPage';
 import DogsPage from 'pages/DogsPage/DogsPage';
 import NewEventPage from 'pages/NewEventPage/NewEventPage';
 import LoginPage from 'pages/LoginPage/LoginPage';
-import LandingPage from 'pages/LandingPage/LandingPage';
+// import LandingPage from 'pages/LandingPage/LandingPage';
 import SignIn from "components/Auth/SignIn/SignIn";
 import SignUp from "./components/Auth/SignUp/SignUp";
 import ForgotPassword from "components/Auth/ForgotPassword/ForgotPassword";
@@ -34,13 +34,11 @@ function App(props) {
   return (
     <div className="App">
       <>
-        {pathName !== '/welcome' && (
-          <HeaderBar />
-        )}
+        <HeaderBar />
 
         <Switch>
           <Route exact path='/' component={HomePage} />
-          <Route path="/welcome" component={LandingPage} />
+          {/* <Route path="/welcome" component={LandingPage} /> */}
           <Route path='/events' component={EventsPage} />
           <Route path='/dogs' component={DogsPage} />
           <Route path='/new-event' component={NewEventPage} />
@@ -50,9 +48,7 @@ function App(props) {
           <Route exact path="/forgot-password" component={ForgotPassword} />
         </Switch>
 
-        {pathName !== '/welcome' && (
-          <FooterBar />
-        )}
+        <FooterBar />
       </>
     </div>
   )
