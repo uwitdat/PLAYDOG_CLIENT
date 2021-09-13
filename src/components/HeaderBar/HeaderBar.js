@@ -5,10 +5,13 @@ import { FiLogOut } from "react-icons/fi";
 import { AiOutlineUser, AiFillPlusCircle } from "react-icons/ai";
 import { useFirebase } from 'react-redux-firebase';
 import { useHistory, Link } from "react-router-dom";
+import { SET_ERRORS } from 'redux-store/types';
+import { useDispatch } from 'react-redux';
 
 const HeaderBar = () => {
     const firebase = useFirebase();
     const history = useHistory();
+    const dispatch = useDispatch();
     let pathname = window.location.pathname
 
     const [path, setPath] = useState('/')
@@ -17,19 +20,23 @@ const HeaderBar = () => {
         setPath(pathname)
     }, [path])
 
-    const signOut = () => {
-        firebase
-          .auth()
-          .signOut()
-          .then(function () {
+    const signOut = async () => {
+        try {
+            await firebase
+            .auth()
+            .signOut()
+
             // Sign-out successful.
             console.log("signed out");
+            setPath('/login')
             history.push("/sign-in");
-          })
-          .catch(function (error) {
-            // An error happened.
+        } catch (error) {
             console.log(error);
-          });
+            dispatch({
+                type: SET_ERRORS,
+                payload: error
+            })
+        }
       };
 
     return (
