@@ -17,8 +17,9 @@ import { connect, useDispatch } from "react-redux";
 import { useEffect } from 'react';
 import HeaderBar from 'components/HeaderBar/HeaderBar';
 import FooterBar from 'components/FooterBar/FooterBar';
-
+import { useLocation } from 'react-router-dom'
 function App() {
+  const location = useLocation();
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -34,7 +35,10 @@ function App() {
     <Router>
       <div className="App">
         <>
-          <HeaderBar />
+          {(location.pathname !== '/' && !location.pathname.includes('/welcome')) && (
+            <HeaderBar />
+          )}
+
           <Switch>
             <Route path='/' exact component={HomePage} />
             <Route path='/events' component={EventsPage} />
@@ -46,7 +50,10 @@ function App() {
             <Route exact path="/sign-up" component={SignUp} />
             <Route exact path="/forgot-password" component={ForgotPassword} />
           </Switch>
-          <FooterBar />
+
+          {(location.pathname !== '/' && !location.pathname.includes('/welcome')) && (
+            <FooterBar />
+          )}
         </>
       </div>
     </Router>

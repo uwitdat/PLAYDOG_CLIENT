@@ -2,7 +2,6 @@ import React from 'react'
 import { connect } from 'react-redux';
 import './LandingPage.css'
 import NavBar from './NavBar';
-
 function LandingPage(state){
 	return (
 		<div>
