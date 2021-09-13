@@ -91,13 +91,8 @@ export default function SignUp() {
   };
 
   return (
-    <div component="main" maxWidth="xs">
+    <div>
       <div>
-        {/* <Avatar className="lock-icon">
-          <LockOutlinedIcon />
-        </Avatar> */}
-        LOCK ICON
-
         <h5>
           Sign up
         </h5>
@@ -107,49 +102,51 @@ export default function SignUp() {
             <input
                 id="email"
                 label={errors.email.length < 1 ? "Email Address" : "Email ERROR"}
-                helperText={errors.email.length > 0 && errors.email}
                 name="email"
                 autoComplete="email"
                 autoFocus
                 type="email"
                 onChange={(e) => setEmail(e.target.value)}
-                error={errors.email.length > 0}
+                error={errors.email.length > 0 ? errors.email : ''}
               />
+
+              <span>
+                {errors.email.length > 0 && errors.email}
+              </span>
           </fieldset>
 
           <fieldset>
             <input
               name="password"
               label={errors.password.length < 1 ? "Password" : "Password ERROR"}
-              helperText={errors.password.length > 0 && errors.password}
               id="password"
               autoComplete="current-password"
               type="password"
               onChange={(e) => setPassword(e.target.value)}
-              error={errors.password.length > 0}
+              error={errors.password.length > 0 ? errors.password : ''}
             />
+
+              <span>
+                {errors.password.length > 0 && errors.password}
+              </span>
           </fieldset>
 
           <button
             type="submit"
-            fullWidth
-            variant="contained"
             className="sign-in--email primary-bg"
             onClick={(event) => signInWithProvider(event, "email")}
           >
             Sign Up
           </button>
 
-          <div container justifyContent="flex-end">
-            <div item>
+          <div>
+            <div>
               <Link to="/sign-in">
                 <p
                   className="display-center"
                 >
                   Already have an account?
                   <button
-                    variant="text"
-                    color="primary"
                     className="ml-2">
                       Sign In
                   </button>
@@ -157,9 +154,8 @@ export default function SignUp() {
               </Link>
             </div>
 
-          <div item xs={12} className="display-center mt-2">
+          <div className="display-center mt-2">
               <button
-                variant="contained"
                 className="sign-in--google primary-bg"
                 onClick={(event) => signInWithProvider(event, "google")}
               >

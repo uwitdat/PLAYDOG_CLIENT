@@ -1,6 +1,5 @@
 import './Global.css';
 import {
-  BrowserRouter as Router,
   Route, Switch
 } from "react-router-dom";
 import HomePage from 'pages/HomePage/HomePage';
@@ -17,9 +16,10 @@ import { connect, useDispatch } from "react-redux";
 import { useEffect } from 'react';
 import HeaderBar from 'components/HeaderBar/HeaderBar';
 import FooterBar from 'components/FooterBar/FooterBar';
-import { useLocation } from "react-router-dom";
-function App() {
-  const location = useLocation();
+import { useLocation, withRouter } from "react-router-dom";
+function App(props) {
+  const location = useLocation()
+  const pathName = location.pathname
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -32,31 +32,29 @@ function App() {
   }, [])
 
   return (
-    <Router>
-      <div className="App">
-        <>
-          {(location.pathname !== '/' && !location.pathname.includes('/welcome')) && (
-            <HeaderBar />
-          )}
+    <div className="App">
+      <>
+        {pathName !== '/welcome' && (
+          <HeaderBar />
+        )}
 
-          <Switch>
-            <Route path='/' exact component={HomePage} />
-            <Route path='/events' component={EventsPage} />
-            <Route path='/dogs' component={DogsPage} />
-            <Route path='/new-event' component={NewEventPage} />
-            <Route path='/login' component={LoginPage} />
-            <Route path="/welcome" component={LandingPage} />
-            <Route exact path="/sign-in" component={SignIn} />
-            <Route exact path="/sign-up" component={SignUp} />
-            <Route exact path="/forgot-password" component={ForgotPassword} />
-          </Switch>
+        <Switch>
+          <Route exact path='/' component={HomePage} />
+          <Route path="/welcome" component={LandingPage} />
+          <Route path='/events' component={EventsPage} />
+          <Route path='/dogs' component={DogsPage} />
+          <Route path='/new-event' component={NewEventPage} />
+          <Route path='/login' component={LoginPage} />
+          <Route exact path="/sign-in" component={SignIn} />
+          <Route exact path="/sign-up" component={SignUp} />
+          <Route exact path="/forgot-password" component={ForgotPassword} />
+        </Switch>
 
-          {(location.pathname !== '/' && !location.pathname.includes('/welcome')) && (
-            <FooterBar />
-          )}
-        </>
-      </div>
-    </Router>
+        {pathName !== '/welcome' && (
+          <FooterBar />
+        )}
+      </>
+    </div>
   )
 }
 
@@ -68,4 +66,4 @@ const mapStateToProps = (state) => {
   }
 };
 
-export default connect(mapStateToProps, {})(App);
+export default withRouter(connect(mapStateToProps, {})(App));

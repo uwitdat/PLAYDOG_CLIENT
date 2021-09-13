@@ -64,17 +64,12 @@ function SignIn({responsive}) {
   return (
     <div>
       <div>
-        {/* <Avatar className="lock-icon">
-          <LockOutlinedIcon />
-        </Avatar> */}
-        LOCK ICON
-
         <h5>
           Sign in
         </h5>
 
         {errors.error.length > 0 && (
-        <div severity="error" className="mt-2">
+        <div className="mt-2">
           <span>Error</span>
           {errors.error}
         </div>
@@ -86,14 +81,17 @@ function SignIn({responsive}) {
               required
               id="email"
               label={errors.email.length < 1 ? "Email Address" : "Email ERROR"}
-              helperText={errors.email.length > 0 && errors.email}
               name="email"
               autoComplete="email"
               autoFocus
               type="email"
               onChange={(e) => setEmail(e.target.value)}
-              error={errors.email.length > 0}
+              error={errors.email.length > 0 ? errors.email : ''}
             />
+
+            <span>
+              {errors.email.length > 0 && errors.email}
+            </span>
           </fieldset>
 
           <fieldset>
@@ -101,13 +99,16 @@ function SignIn({responsive}) {
               required
               name="password"
               label={errors.password.length < 1 ? "Password" : "Password ERROR"}
-              helperText={errors.password.length > 0 && errors.password}
               id="password"
               autoComplete="current-password"
               type="password"
               onChange={(e) => setPassword(e.target.value)}
-              error={errors.password.length > 0}
+              error={errors.password.length > 0 ? errors.password : ''}
             />
+
+            <span>
+              {errors.password.length > 0 && errors.password}
+            </span>
           </fieldset>
 
           <label htmlFor="checkbox">
@@ -118,8 +119,6 @@ function SignIn({responsive}) {
 
           <button
             type="submit"
-            fullWidth
-            variant="contained"
             className="sign-in--email primary-bg"
             onClick={(event) => signInWithProvider(event, "email")}
           >
@@ -127,11 +126,8 @@ function SignIn({responsive}) {
           </button>
 
 
-          <div container>
-            <div
-              item
-              xs={12}
-            >
+          <div>
+            <div>
               <Link to="/forgot-password" variant="body2">
                 <p>
                     Forgot Password?
@@ -139,26 +135,20 @@ function SignIn({responsive}) {
               </Link>
             </div>
 
-            <div
-              item
-              xs={12}
-              className="mt-2"
-            >
+            <div className="mt-2">
               <Link to="/sign-up">
                 <p
                   className="display-center"
                 >
                     Don&apos;t have an account?
-                    <button
-                      color="primary"
-                      className="ml-2">
+                    <button className="ml-2">
                         Sign Up
                     </button>
                 </p>
               </Link>
             </div>
 
-            <div item xs={12} className="display-center p-3">
+            <div className="display-center p-3">
               <button
                 className="sign-in--google primary-bg"
                 onClick={(event) => signInWithProvider(event, "google")}
