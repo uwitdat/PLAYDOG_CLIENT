@@ -10,16 +10,14 @@ const HeaderBar = () => {
     const firebase = useFirebase();
     const history = useHistory();
     const dispatch = useDispatch();
-    let pathname = window.location.pathname
-
-
-    console.log(firebase._.authUid)
+    let pathname = window.location.href
 
     const [path, setPath] = useState('/')
 
-    // useEffect(() => {
-    //     setPath(pathname)
-    // }, [path])
+
+    useEffect(() => {
+        setPath(pathname)
+    }, [path])
 
     const signOut = async () => {
         try {
@@ -41,24 +39,24 @@ const HeaderBar = () => {
     };
 
     return (
-        <div className='HeaderBar'>
+        <div className='HeaderBar' onClick={() => setPath('home')}>
             <Link to='/'>
                 <h1 className='HeaderBar__title'>Walki</h1>
             </Link>
             <div className='Mobile-nav'>
                 <Link to='/dogs'>
-                    <div onClick={() => setPath('dogs')} className={path === 'dogs' ? 'Mobile-nav-elm border-orange' : 'Mobile-nav-elm'}>
-                        <p className={path === 'dogs' ? 'Mobile-nav-elm__text black' : 'Mobile-nav-elm__text'}>View Dogs</p>
+                    <div onClick={() => setPath('http://localhost:3000/PLAYDOG_CLIENT#/dogs')} className={path === 'http://localhost:3000/PLAYDOG_CLIENT#/dogs' ? 'Mobile-nav-elm border-orange' : 'Mobile-nav-elm'}>
+                        <p className={path === 'http://localhost:3000/PLAYDOG_CLIENT#/dogs' ? 'Mobile-nav-elm__text black' : 'Mobile-nav-elm__text'}>View Dogs</p>
                     </div>
                 </Link>
                 <Link to='/events'>
-                    <div onClick={() => setPath('/events')} className={path === '/events' ? 'Mobile-nav-elm border-orange black' : 'Mobile-nav-elm'}>
-                        <p className={path === '/events' ? 'Mobile-nav-elm__text black' : 'Mobile-nav-elm__text'}>View Events</p>
+                    <div onClick={() => setPath('http://localhost:3000/PLAYDOG_CLIENT#/events')} className={path === 'http://localhost:3000/PLAYDOG_CLIENT#/events' ? 'Mobile-nav-elm border-orange black' : 'Mobile-nav-elm'}>
+                        <p className={path === 'http://localhost:3000/PLAYDOG_CLIENT#/events' ? 'Mobile-nav-elm__text black' : 'Mobile-nav-elm__text'}>View Events</p>
                     </div>
                 </Link>
                 <Link to='/new-event'>
-                    <div onClick={() => setPath('/new-event')} className={path === '/new-event' ? 'Mobile-nav-elm border-orange black' : 'Mobile-nav-elm'}>
-                        <p className={path === '/new-event' ? 'Mobile-nav-elm__text black' : 'Mobile-nav-elm__text'}>New Event</p>
+                    <div onClick={() => setPath('http://localhost:3000/PLAYDOG_CLIENT#/new-event')} className={path === 'http://localhost:3000/PLAYDOG_CLIENT#/new-event' ? 'Mobile-nav-elm border-orange black' : 'Mobile-nav-elm'}>
+                        <p className={path === 'http://localhost:3000/PLAYDOG_CLIENT#/new-event' ? 'Mobile-nav-elm__text black' : 'Mobile-nav-elm__text'}>New Event</p>
                     </div>
                 </Link>
                 {/* <Link to='/login'> */}
@@ -67,8 +65,8 @@ const HeaderBar = () => {
                 </div>
                 {/* </Link> */}
                 <Link to='/profile'>
-                    <div onClick={() => setPath('/profile')} className={path === '/profile' ? 'Mobile-nav-elm border-orange black' : 'Mobile-nav-elm'}>
-                        <p className={path === '/profile' ? 'Mobile-nav-elm__text black' : 'Mobile-nav-elm__text'}>Profile</p>
+                    <div onClick={() => setPath('http://localhost:3000/PLAYDOG_CLIENT#/profile')} className={path === 'http://localhost:3000/PLAYDOG_CLIENT#/profile' ? 'Mobile-nav-elm border-orange black' : 'Mobile-nav-elm'}>
+                        <p className={path === 'http://localhost:3000/PLAYDOG_CLIENT#/profile' ? 'Mobile-nav-elm__text black' : 'Mobile-nav-elm__text'}>Profile</p>
                     </div>
                 </Link>
 
