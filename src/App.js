@@ -16,6 +16,7 @@ import HeaderBar from 'components/HeaderBar/HeaderBar';
 import FooterBar from 'components/FooterBar/FooterBar';
 import { withRouter } from "react-router-dom";
 import ProfilePage from 'pages/ProfilePage/ProfilePage';
+import DogPage from 'pages/DogPage/DogPage';
 function App(props) {
 
   const dispatch = useDispatch()
@@ -34,7 +35,8 @@ function App(props) {
         <Route exact path='/' component={HomePage} />
         <Route path='/events' component={EventsPage} />
         <Route path="/profile" component={ProfilePage} />
-        <Route path='/dogs' component={DogsPage} />
+        <Route exact path='/dogs' component={DogsPage} />
+        <Route exact path='/dogs/:id' component={DogPage} />
         <Route path='/new-event' component={NewEventPage} />
         <Route exact path="/sign-in" component={SignIn} />
         <Route exact path="/sign-up" component={SignUp} />
