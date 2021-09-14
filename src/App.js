@@ -19,16 +19,9 @@ import FooterBar from 'components/FooterBar/FooterBar';
 import { useLocation, withRouter } from "react-router-dom";
 import { useSelector } from 'react-redux'
 
-
-
-
 function App(props) {
 
   const profile = useSelector((state) => state.firebase.auth);
-
-  console.log('AUTH', profile.email)
-
-
 
   const location = useLocation()
   const pathName = location.pathname
@@ -55,16 +48,13 @@ function App(props) {
         ) : (
           <>
             <HeaderBar />
-
             <Switch>
               <Route exact path='/' component={HomePage} />
               {/* <Route path="/welcome" component={LandingPage} /> */}
               <Route path='/events' component={EventsPage} />
               <Route path='/dogs' component={DogsPage} />
               <Route path='/new-event' component={NewEventPage} />
-
             </Switch>
-
             <FooterBar />
           </>
         )}
@@ -78,8 +68,7 @@ App.propTypes = {
 }
 
 const mapStateToProps = (state) => {
-  return {
-  }
+  return {}
 };
 
 export default withRouter(connect(mapStateToProps, {})(App));
