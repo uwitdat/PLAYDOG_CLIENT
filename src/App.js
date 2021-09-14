@@ -24,9 +24,9 @@ import { useSelector } from 'react-redux'
 
 function App(props) {
 
-  const auth = useSelector((state) => state.firebase.auth);
+  const profile = useSelector((state) => state.firebase.auth);
 
-  console.log('AUTH', auth)
+  console.log('AUTH', profile.email)
 
 
 
@@ -46,21 +46,29 @@ function App(props) {
   return (
     <div className="App">
       <>
-        <HeaderBar />
+        {profile.isEmpty ? (
+          <Switch>
+            <Route exact path="/sign-in" component={SignIn} />
+            <Route exact path="/sign-up" component={SignUp} />
+            <Route exact path="/forgot-password" component={ForgotPassword} />
+          </Switch>
+        ) : (
+          <>
+            <HeaderBar />
 
-        <Switch>
-          <Route exact path='/' component={HomePage} />
-          {/* <Route path="/welcome" component={LandingPage} /> */}
-          <Route path='/events' component={EventsPage} />
-          <Route path='/dogs' component={DogsPage} />
-          <Route path='/new-event' component={NewEventPage} />
-          <Route path='/login' component={LoginPage} />
-          <Route exact path="/sign-in" component={SignIn} />
-          <Route exact path="/sign-up" component={SignUp} />
-          <Route exact path="/forgot-password" component={ForgotPassword} />
-        </Switch>
+            <Switch>
+              <Route exact path='/' component={HomePage} />
+              {/* <Route path="/welcome" component={LandingPage} /> */}
+              <Route path='/events' component={EventsPage} />
+              <Route path='/dogs' component={DogsPage} />
+              <Route path='/new-event' component={NewEventPage} />
 
-        <FooterBar />
+            </Switch>
+
+            <FooterBar />
+          </>
+        )}
+
       </>
     </div>
   )
