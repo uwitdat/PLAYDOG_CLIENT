@@ -25,7 +25,7 @@ export default function ForgotPassword() {
   };
 
   return (
-    <div component="main" maxWidth="xs">
+    <div>
       <div>
         {successMessage ? (
           <h5>
@@ -49,7 +49,6 @@ export default function ForgotPassword() {
 
               <button
                 type="submit"
-                fullWidth
                 variant="contained"
                 className="forgot-password--email primary-bg"
                 onClick={(event) => forgotPass(event)}
@@ -60,8 +59,8 @@ export default function ForgotPassword() {
           </>
         )}
 
-        <div item className="pt-2">
-          <Link to="/sign-in" variant="body2" className="forgot-password--back-to-sign-in space-between">
+        <div className="pt-2">
+          <Link to="/sign-in" className="forgot-password--back-to-sign-in space-between">
             {/* <ArrowBackIcon /> */}
             {"<"}
               <span className="pl-1">
