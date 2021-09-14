@@ -17,10 +17,16 @@ import { useEffect } from 'react';
 import HeaderBar from 'components/HeaderBar/HeaderBar';
 import FooterBar from 'components/FooterBar/FooterBar';
 import { useLocation, withRouter } from "react-router-dom";
+import { useSelector } from 'react-redux'
+
 
 
 
 function App(props) {
+
+  const auth = useSelector((state) => state.firebase.auth);
+
+  console.log('AUTH', auth)
 
 
 
