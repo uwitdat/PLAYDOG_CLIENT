@@ -17,6 +17,9 @@ import { useEffect } from 'react';
 import HeaderBar from 'components/HeaderBar/HeaderBar';
 import FooterBar from 'components/FooterBar/FooterBar';
 import { useLocation, withRouter } from "react-router-dom";
+
+
+
 function App(props) {
   const location = useLocation()
   const pathName = location.pathname
