@@ -31,7 +31,10 @@
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "new-component": "npx hygen new-component with-prompt"
+    "new-hygen-template": "hygen generator with-prompt ",
+    "new-component": "npx hygen new-component with-prompt",
+    "new-page": "npx hygen new-page with-prompt",
+    "new-action": "npx hygen store-action with-prompt"
   },
   "eslintConfig": {
     "extends": [
