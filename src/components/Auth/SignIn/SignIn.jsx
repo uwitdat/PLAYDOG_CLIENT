@@ -69,11 +69,12 @@ function SignIn({ responsive }) {
         </h5>
 
         {errors.error.length > 0 && (
-          <div className="mt-2">
-            <span>Error</span>
-            {errors.error}
-          </div>
+          <p className='Auth__txt err'>{errors.error}</p>
         )}
+
+        <p className='Auth__txt err'>
+          {errors.password.length > 0 && errors.password}
+        </p>
 
         <form
           className='Auth__form'
@@ -112,9 +113,7 @@ function SignIn({ responsive }) {
               error={errors.password.length > 0 ? errors.password : ''}
             />
 
-            <span>
-              {errors.password.length > 0 && errors.password}
-            </span>
+
           </fieldset>
 
           {/*<label htmlFor="checkbox">

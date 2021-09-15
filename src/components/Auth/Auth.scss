@@ -137,3 +137,10 @@ $color-orange: rgb(207, 102, 3);
 .bold {
   font-weight: bolder;
 }
+
+.err {
+  font-size: 1.5rem;
+  font-family: $font-secondary;
+  color: red;
+  font-style: italic;
+}

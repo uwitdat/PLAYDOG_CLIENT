@@ -9,6 +9,11 @@ export default function SignUp() {
   const history = useHistory();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [err, setErr] = useState({
+    state: false,
+    msg: ''
+  })
   const [errors, setErrors] = useState({
     "email": "",
     "password": "",
@@ -19,7 +24,15 @@ export default function SignUp() {
     event.preventDefault()
     let userEmail = email.length >= 1 ? email : "";
     let userPassword = password.length >= 1 ? password : "";
-    if (provider === "email") {
+    if (password !== confirmPassword) {
+      setErr({
+        state: true,
+        msg: 'Your passwords do not match'
+      })
+      setConfirmPassword('')
+      setPassword('')
+    }
+    else if (provider === "email") {
       try {
         const response = await firebase
           .createUser({
@@ -27,7 +40,6 @@ export default function SignUp() {
             password,
           })
 
-        console.log(response)
         const token = await firebase.auth().currentUser.getIdToken()
         localStorage.setItem('fb-token', token)
         history.push("/");
@@ -96,7 +108,9 @@ export default function SignUp() {
         <h5>
           Sign up
         </h5>
-
+        {err.state === true ? <p className='Auth__txt err'>{err.msg}</p> : null}
+        <p className='Auth__txt err'>{errors.email.length > 0 && errors.email}</p>
+        <p className='Auth__txt err'>{errors.password.length > 0 && errors.password}</p>
         <form
           className='Auth__form'
           noValidate>
@@ -114,9 +128,6 @@ export default function SignUp() {
               error={errors.email.length > 0 ? errors.email : ''}
             />
 
-            <span>
-              {errors.email.length > 0 && errors.email}
-            </span>
           </fieldset>
 
           <fieldset>
@@ -128,14 +139,21 @@ export default function SignUp() {
               autoComplete="current-password"
               type="password"
               placeholder='Password'
+              value={password}
               onChange={(e) => setPassword(e.target.value)}
               error={errors.password.length > 0 ? errors.password : ''}
             />
 
-            <span>
-              {errors.password.length > 0 && errors.password}
-            </span>
+
           </fieldset>
+          <input
+            className='Auth__input'
+            name="password-confirm"
+            placeholder='Confirm Password'
+            type='password'
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+          />
 
           <button
             type="submit"
