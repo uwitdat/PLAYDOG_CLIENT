@@ -14,20 +14,24 @@ import { connect, useDispatch } from "react-redux";
 import { useEffect } from 'react';
 import HeaderBar from 'components/HeaderBar/HeaderBar';
 import FooterBar from 'components/FooterBar/FooterBar';
-import { useLocation, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import { useSelector } from 'react-redux'
+import ProfilePage from 'pages/ProfilePage/ProfilePage';
+import { useState } from 'react';
+import DogPage from 'pages/DogPage/DogPage';
 
 function App(props) {
 
   const profile = useSelector((state) => state.firebase.auth);
-
-  const location = useLocation()
-  const pathName = location.pathname
   const dispatch = useDispatch()
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     dispatch({ type: SET_WINDOW_WIDTH })
     window.addEventListener('resize', () => dispatch({ type: SET_WINDOW_WIDTH }))
+    setTimeout(function(){
+      setLoading(false);
+    }, 2000);
     return () => window.removeEventListener('resize', () => dispatch({ type: SET_WINDOW_WIDTH }))
     // eslint-disable-next-line
   }, [])
@@ -35,26 +39,34 @@ function App(props) {
   return (
     <div className="App">
       <>
-        {profile.isEmpty ? (
-          <Switch>
-            <Route exact path="/sign-in" component={SignIn} />
-            <Route exact path="/sign-up" component={SignUp} />
-            <Route exact path="/forgot-password" component={ForgotPassword} />
-          </Switch>
-        ) : (
-          <>
-            <HeaderBar />
+        {(loading) ? (
+          <div className="loader" style={{width: '100%'}} >
+            <img src="https://static.wixstatic.com/media/d4e6ca_420fa2703afa4fd08cc1906669066a75~mv2.gif" style={{display: 'flex', margin: 'auto'}} alt=".."></img>
+          </div>
+        ): (
+          profile.isEmpty ? (
             <Switch>
-              <Route exact path='/' component={HomePage} />
-              {/* <Route path="/welcome" component={LandingPage} /> */}
-              <Route path='/events' component={EventsPage} />
-              <Route path='/dogs' component={DogsPage} />
-              <Route path='/new-event' component={NewEventPage} />
+              <Route exact path='/' component={SignIn} />
+              <Route exact path="/sign-in" component={SignIn} />
+              <Route exact path="/sign-up" component={SignUp} />
+              <Route exact path="/forgot-password" component={ForgotPassword} />
             </Switch>
-            <FooterBar />
-          </>
+          ) : (
+            <>
+              <HeaderBar />
+              <Switch>
+                <Route exact path='/' component={HomePage} />
+                {/* <Route path="/welcome" component={LandingPage} /> */}
+                <Route path='/events' component={EventsPage} />
+                <Route exact path='/dogs' component={DogsPage} />
+                <Route exact path="/dogs/:id" component={DogPage} />
+                <Route path='/new-event' component={NewEventPage} />
+                <Route path="/profile" component={ProfilePage} />
+              </Switch>
+              <FooterBar />
+            </>
+          )
         )}
-
       </>
     </div>
   )
