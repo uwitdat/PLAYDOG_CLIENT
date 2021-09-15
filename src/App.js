@@ -17,7 +17,12 @@ import { useEffect } from 'react';
 import HeaderBar from 'components/HeaderBar/HeaderBar';
 import FooterBar from 'components/FooterBar/FooterBar';
 import { useLocation, withRouter } from "react-router-dom";
+import { useSelector } from 'react-redux'
+
 function App(props) {
+
+  const profile = useSelector((state) => state.firebase.auth);
+
   const location = useLocation()
   const pathName = location.pathname
   const dispatch = useDispatch()
@@ -34,21 +39,26 @@ function App(props) {
   return (
     <div className="App">
       <>
-        <HeaderBar />
+        {profile.isEmpty ? (
+          <Switch>
+            <Route exact path="/sign-in" component={SignIn} />
+            <Route exact path="/sign-up" component={SignUp} />
+            <Route exact path="/forgot-password" component={ForgotPassword} />
+          </Switch>
+        ) : (
+          <>
+            <HeaderBar />
+            <Switch>
+              <Route exact path='/' component={HomePage} />
+              {/* <Route path="/welcome" component={LandingPage} /> */}
+              <Route path='/events' component={EventsPage} />
+              <Route path='/dogs' component={DogsPage} />
+              <Route path='/new-event' component={NewEventPage} />
+            </Switch>
+            <FooterBar />
+          </>
+        )}
 
-        <Switch>
-          <Route exact path='/' component={HomePage} />
-          {/* <Route path="/welcome" component={LandingPage} /> */}
-          <Route path='/events' component={EventsPage} />
-          <Route path='/dogs' component={DogsPage} />
-          <Route path='/new-event' component={NewEventPage} />
-          <Route path='/login' component={LoginPage} />
-          <Route exact path="/sign-in" component={SignIn} />
-          <Route exact path="/sign-up" component={SignUp} />
-          <Route exact path="/forgot-password" component={ForgotPassword} />
-        </Switch>
-
-        <FooterBar />
       </>
     </div>
   )
@@ -58,8 +68,7 @@ App.propTypes = {
 }
 
 const mapStateToProps = (state) => {
-  return {
-  }
+  return {}
 };
 
 export default withRouter(connect(mapStateToProps, {})(App));

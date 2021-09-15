@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { useFirebase } from "react-redux-firebase";
 import { useHistory, Link } from "react-router-dom";
+import { AiFillGoogleCircle } from 'react-icons/ai';
 // import Notifications from "../../General/Notifications/Notifications";
 import "../Auth.scss";
-import Copyright from 'components/Copyright/Copyright';
 import { connect } from 'react-redux';
 
-function SignIn({responsive}) {
+function SignIn({ responsive }) {
   const firebase = useFirebase();
   const history = useHistory();
   const [email, setEmail] = useState("");
@@ -24,19 +24,19 @@ function SignIn({responsive}) {
 
     try {
       const response = await firebase
-      .login({
-        provider: provider === "email" ? null : provider,
-        type: "popup",
-        email: userEmail,
-        password: userPassword,
-      })
+        .login({
+          provider: provider === "email" ? null : provider,
+          type: "popup",
+          email: userEmail,
+          password: userPassword,
+        })
 
       console.log(response)
       const token = await firebase.auth().currentUser.getIdToken()
       localStorage.setItem('fb-token', token)
       history.push("/");
 
-    } catch(err) {
+    } catch (err) {
       console.log(err)
       console.log(`Error: ${err.message}`)
       if (err.code?.includes('email')) {
@@ -52,37 +52,42 @@ function SignIn({responsive}) {
           "error": errors.error
         });
       } else {
-      setErrors({
-        "email": errors.email,
-        "password": errors.password,
-        "error": err.message,
-      });
-    }
+        setErrors({
+          "email": errors.email,
+          "password": errors.password,
+          "error": err.message,
+        });
+      }
     }
   };
 
   return (
     <div>
-      <div>
+      <div className='Auth'>
         <h5>
-          Sign in
+          Login
         </h5>
 
         {errors.error.length > 0 && (
-        <div className="mt-2">
-          <span>Error</span>
-          {errors.error}
-        </div>
+          <p className='Auth__txt err'>{errors.error}</p>
         )}
 
-        <form noValidate>
+        <p className='Auth__txt err'>
+          {errors.password.length > 0 && errors.password}
+        </p>
+
+        <form
+          className='Auth__form'
+          noValidate>
           <fieldset>
             <input
+              className='Auth__input'
               required
               id="email"
               label={errors.email.length < 1 ? "Email Address" : "Email ERROR"}
               name="email"
               autoComplete="email"
+              placeholder='Email'
               autoFocus
               type="email"
               onChange={(e) => setEmail(e.target.value)}
@@ -96,7 +101,9 @@ function SignIn({responsive}) {
 
           <fieldset>
             <input
+              className='Auth__input'
               required
+              placeholder='Password'
               name="password"
               label={errors.password.length < 1 ? "Password" : "Password ERROR"}
               id="password"
@@ -106,20 +113,18 @@ function SignIn({responsive}) {
               error={errors.password.length > 0 ? errors.password : ''}
             />
 
-            <span>
-              {errors.password.length > 0 && errors.password}
-            </span>
+
           </fieldset>
 
-          <label htmlFor="checkbox">
+          {/*<label htmlFor="checkbox">
             Remember Me
-          </label>
+        </label>
 
-          <input type="checkbox" value="remember" color="primary" />
+          <input type="checkbox" value="remember" color="primary" />*/}
 
           <button
             type="submit"
-            className="sign-in--email primary-bg"
+            className="Auth__btn"
             onClick={(event) => signInWithProvider(event, "email")}
           >
             Sign In
@@ -129,8 +134,8 @@ function SignIn({responsive}) {
           <div>
             <div>
               <Link to="/forgot-password" variant="body2">
-                <p>
-                    Forgot Password?
+                <p className="Auth__txt blue">
+                  Forgot Password?
                 </p>
               </Link>
             </div>
@@ -138,33 +143,26 @@ function SignIn({responsive}) {
             <div className="mt-2">
               <Link to="/sign-up">
                 <p
-                  className="display-center"
+                  className="Auth__txt"
                 >
-                    Don&apos;t have an account?
-                    <button className="ml-2">
-                        Sign Up
-                    </button>
+                  Don&apos;t have an account? <span className='bold'>Signup</span>
                 </p>
               </Link>
             </div>
 
-            <div className="display-center p-3">
-              <button
-                className="sign-in--google primary-bg"
+            <div className="display-center mt-2">
+              <AiFillGoogleCircle
+                className="Auth__google-icon"
                 onClick={(event) => signInWithProvider(event, "google")}
               >
                 <i className="fa fa-google" aria-hidden="true"></i>
 
-                <span className="pl-1">
-                  Login with Google
-                </span>
-              </button>
+              </AiFillGoogleCircle>
             </div>
+            <p className='Auth__google-txt'>Login with Google</p>
           </div>
         </form>
       </div>
-
-      <Copyright />
     </div>
   );
 }
