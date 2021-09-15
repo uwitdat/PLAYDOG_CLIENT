@@ -5,6 +5,7 @@ import { useHistory, Link } from "react-router-dom";
 import { SET_ERRORS } from 'redux-store/types';
 import { useDispatch } from 'react-redux';
 import { useFirebase } from "react-redux-firebase";
+import { FaUserCircle } from 'react-icons/fa'
 
 const HeaderBar = () => {
     const firebase = useFirebase();
@@ -70,8 +71,15 @@ const HeaderBar = () => {
                     </div>
                 </Link>
 
-            </div >
-        </div >
+
+            </div>
+
+            <Link to='/profile'>
+                <div onClick={() => setPath('http://localhost:3000/PLAYDOG_CLIENT#/profile')} className={path === 'http://localhost:3000/PLAYDOG_CLIENT#/profile' ? 'user-profile-icon black' : 'user-profile-icon'}>
+                    <FaUserCircle />
+                </div>
+            </Link>
+        </div>
     )
 }
 

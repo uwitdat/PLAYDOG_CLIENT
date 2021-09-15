@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { AiFillGoogleCircle } from 'react-icons/ai';
 import { useFirebase } from "react-redux-firebase";
 import { useHistory, Link } from "react-router-dom";
+import GoogleIcon from 'assets/images/Google_Logo.png'
 import "../Auth.scss";
 
 export default function SignUp() {
@@ -175,13 +176,15 @@ export default function SignUp() {
             </div>
 
             <div className="display-center mt-2">
+              <img src={GoogleIcon} style={{ height: '5rem' }} alt='#' className="Auth__google-icon" onClick={(event) => signInWithProvider(event, "google")} />
+              <i className="fa fa-google" aria-hidden="true"></i>
 
-              <AiFillGoogleCircle
+              {/*<AiFillGoogleCircle
                 className="Auth__google-icon"
                 onClick={(event) => signInWithProvider(event, "google")}
               >
                 <i className="fa fa-google" aria-hidden="true"></i>
-              </AiFillGoogleCircle>
+              </AiFillGoogleCircle>*/}
             </div>
             <p className='Auth__google-txt'>Signup with Google</p>
           </div>
