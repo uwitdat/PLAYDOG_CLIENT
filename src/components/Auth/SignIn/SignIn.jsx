@@ -5,7 +5,6 @@ import { AiFillGoogleCircle } from 'react-icons/ai';
 // import Notifications from "../../General/Notifications/Notifications";
 import "../Auth.scss";
 import { connect } from 'react-redux';
-import { Container, Row, Form, Col } from 'react-bootstrap';
 
 function SignIn({ responsive }) {
   const firebase = useFirebase();
