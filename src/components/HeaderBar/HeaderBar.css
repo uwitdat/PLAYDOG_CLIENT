@@ -3,6 +3,7 @@
   height: 6rem;
   margin-bottom: 2rem;
   display: flex;
+  justify-content: space-between;
   align-items: center;
   background-color: var(--color-grey-light);
   box-shadow: rgba(99, 99, 99, 0.075) 0px 2px 8px 0px;
@@ -66,4 +67,18 @@
 
 .black {
   color: black !important;
+}
+
+.user-profile-icon {
+  font-size: 3.2rem;
+  margin-right: 1rem;
+  display: flex;
+  color: var(--color-grey-dark);
+  transition: 300ms;
+}
+
+@media only screen and (min-width: 700px) {
+  .user-profile-icon {
+    display: none;
+  }
 }
