@@ -16,8 +16,8 @@ const HeaderBar = () => {
 
 
     useEffect(() => {
-        setPath(pathname)
-    }, [path])
+        setPath(pathname);
+    }, [path, pathname])
 
     const signOut = async () => {
         try {
@@ -75,4 +75,4 @@ const HeaderBar = () => {
     )
 }
 
-export default HeaderBar
+export default HeaderBar;

@@ -18,7 +18,7 @@ const FooterBar = () => {
 
     useEffect(() => {
         setPath(pathname)
-    }, [path])
+    }, [path, pathname])
 
     return (
         <div className='FooterBar'>
