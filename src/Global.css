@@ -3,6 +3,7 @@
   --color-grey-light: rgb(238, 238, 238);
   --color-grey-dark: rgb(71, 71, 71);
   --font-title: "Luckiest Guy", cursive;
+  --font-secondary: "Inter", sans-serif;
 }
 
 /* CSS RESET */
@@ -25,5 +26,10 @@ h1 {
 }
 
 a {
-  text-decoration: none;
+  text-decoration: none !important;
+}
+
+.row>* {
+  padding-right: 0 !important;
+  padding-left: 0 !important;
 }

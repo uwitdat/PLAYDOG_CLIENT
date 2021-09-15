@@ -53,9 +53,9 @@
 }
 
 .Mobile-nav-elm__text {
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   color: var(--color-grey-dark);
-  font-family: var(--font-title);
+  font-family: var(--font-secondary);
 }
 
 .border-orange {

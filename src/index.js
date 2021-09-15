@@ -15,6 +15,7 @@ import "./config/firebase";
 import firebase from "firebase/app";
 
 import "assets/stylesheets/main.scss"
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const rrfConfig = {
   userProfile: "users",
