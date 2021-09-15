@@ -27,7 +27,7 @@ const EditProfilePage = () => {
 
   const setCountry = (e) => {
     setUserProfile({ ...userProfile, country: e.target.value });
-    
+
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
     var raw = JSON.stringify({ "country": e.target.value });
@@ -159,6 +159,16 @@ const EditProfilePage = () => {
                     </Row>
                     <Row>
                       <Col lg={4} className="px-3">
+                        <Form.Group className="mb-3" controlId="country">
+                          <Form.Label>Country</Form.Label>
+                          <Form.Select aria-label="Select Country" value={userProfile.country || ''} onChange={(e) => setCountry(e)}>
+                            <option>Select Country</option>
+                            <option value="canada">Canada</option>
+                            <option value="united states">United States</option>
+                          </Form.Select>
+                        </Form.Group>
+                      </Col>
+                      <Col lg={4} className="px-3">
                         <Form.Group className="mb-3" controlId="state_province">
                           <Form.Label>State/Province</Form.Label>
                           <Form.Select aria-label="Select State/Province" value={userProfile.state_province || ''} onChange={(e) => setUserProfile({ ...userProfile, state_province: e.target.value })}>
@@ -174,20 +184,15 @@ const EditProfilePage = () => {
                           <Form.Control type="text" placeholder="Enter postal/zip code" name="postal_zipcode" value={userProfile.postal_zipcode || ''} onChange={(e) => setUserProfile({ ...userProfile, postal_zipcode: e.target.value })} />
                         </Form.Group>
                       </Col>
-                      <Col lg={4} className="px-3">
-                        <Form.Group className="mb-3" controlId="country">
-                          <Form.Label>Country</Form.Label>
-                          <Form.Select aria-label="Select Country" value={userProfile.country || ''} onChange={(e) => setCountry(e)}>
-                            <option>Select Country</option>
-                            <option value="canada">Canada</option>
-                            <option value="united states">United States</option>
-                          </Form.Select>
-                        </Form.Group>
-                      </Col>
+
                     </Row>
 
                     <br />
-                    <Button variant="primary" type="submit">Save</Button>
+                    <Button variant="primary" type="submit" style={{ height: '25px' }} ref={(el) => {
+                      if (el) {
+                        el.style.setProperty('font-size', '10px', 'important');
+                      }
+                    }}>Save</Button>
                     <Link to="/profile" className="btn btn-secondary ml-1">Cancel</Link>
                   </Form>
                 </div>
