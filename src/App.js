@@ -14,11 +14,15 @@ import { connect, useDispatch } from "react-redux";
 import { useEffect } from 'react';
 import HeaderBar from 'components/HeaderBar/HeaderBar';
 import FooterBar from 'components/FooterBar/FooterBar';
-import { withRouter } from "react-router-dom";
-import ProfilePage from 'pages/ProfilePage/ProfilePage';
-import DogPage from 'pages/DogPage/DogPage';
+import { useLocation, withRouter } from "react-router-dom";
+import { useSelector } from 'react-redux'
+
 function App(props) {
 
+  const profile = useSelector((state) => state.firebase.auth);
+
+  const location = useLocation()
+  const pathName = location.pathname
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -30,19 +34,28 @@ function App(props) {
 
   return (
     <div className="App">
-      <HeaderBar />
-      <Switch>
-        <Route exact path='/' component={HomePage} />
-        <Route path='/events' component={EventsPage} />
-        <Route path="/profile" component={ProfilePage} />
-        <Route exact path='/dogs' component={DogsPage} />
-        <Route exact path='/dogs/:id' component={DogPage} />
-        <Route path='/new-event' component={NewEventPage} />
-        <Route exact path="/sign-in" component={SignIn} />
-        <Route exact path="/sign-up" component={SignUp} />
-        <Route exact path="/forgot-password" component={ForgotPassword} />
-      </Switch>
-      <FooterBar />
+      <>
+        {profile.isEmpty ? (
+          <Switch>
+            <Route exact path="/sign-in" component={SignIn} />
+            <Route exact path="/sign-up" component={SignUp} />
+            <Route exact path="/forgot-password" component={ForgotPassword} />
+          </Switch>
+        ) : (
+          <>
+            <HeaderBar />
+            <Switch>
+              <Route exact path='/' component={HomePage} />
+              {/* <Route path="/welcome" component={LandingPage} /> */}
+              <Route path='/events' component={EventsPage} />
+              <Route path='/dogs' component={DogsPage} />
+              <Route path='/new-event' component={NewEventPage} />
+            </Switch>
+            <FooterBar />
+          </>
+        )}
+
+      </>
     </div>
   )
 }
@@ -51,7 +64,7 @@ App.propTypes = {
 }
 
 const mapStateToProps = (state) => {
-  return state;
+  return {}
 };
 
 export default withRouter(connect(mapStateToProps, {})(App));

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Copyright from 'components/Copyright/Copyright';
+import { AiFillGoogleCircle } from 'react-icons/ai';
 import { useFirebase } from "react-redux-firebase";
 import { useHistory, Link } from "react-router-dom";
 import "../Auth.scss";
@@ -9,6 +9,11 @@ export default function SignUp() {
   const history = useHistory();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [err, setErr] = useState({
+    state: false,
+    msg: ''
+  })
   const [errors, setErrors] = useState({
     "email": "",
     "password": "",
@@ -19,7 +24,15 @@ export default function SignUp() {
     event.preventDefault()
     let userEmail = email.length >= 1 ? email : "";
     let userPassword = password.length >= 1 ? password : "";
-    if (provider === "email") {
+    if (password !== confirmPassword) {
+      setErr({
+        state: true,
+        msg: 'Your passwords do not match'
+      })
+      setConfirmPassword('')
+      setPassword('')
+    }
+    else if (provider === "email") {
       try {
         const response = await firebase
           .createUser({
@@ -27,11 +40,10 @@ export default function SignUp() {
             password,
           })
 
-      console.log(response)
-      const token = await firebase.auth().currentUser.getIdToken()
-      localStorage.setItem('fb-token', token)
-      history.push("/");
-    } catch (err) {
+        const token = await firebase.auth().currentUser.getIdToken()
+        localStorage.setItem('fb-token', token)
+        history.push("/");
+      } catch (err) {
         if (err.code?.includes('email')) {
           setErrors({
             "email": err.message,
@@ -66,7 +78,7 @@ export default function SignUp() {
         const token = await firebase.auth().currentUser.getIdToken()
         localStorage.setItem('fb-token', token)
         history.push("/");
-    } catch (err) {
+      } catch (err) {
         if (err.code?.includes('email')) {
           setErrors({
             "email": err.message,
@@ -92,48 +104,60 @@ export default function SignUp() {
 
   return (
     <div>
-      <div>
+      <div className='Auth'>
         <h5>
           Sign up
         </h5>
-
-        <form noValidate>
+        {err.state === true ? <p className='Auth__txt err'>{err.msg}</p> : null}
+        <p className='Auth__txt err'>{errors.email.length > 0 && errors.email}</p>
+        <p className='Auth__txt err'>{errors.password.length > 0 && errors.password}</p>
+        <form
+          className='Auth__form'
+          noValidate>
           <fieldset>
             <input
-                id="email"
-                label={errors.email.length < 1 ? "Email Address" : "Email ERROR"}
-                name="email"
-                autoComplete="email"
-                autoFocus
-                type="email"
-                onChange={(e) => setEmail(e.target.value)}
-                error={errors.email.length > 0 ? errors.email : ''}
-              />
+              className='Auth__input'
+              id="email"
+              label={errors.email.length < 1 ? "Email Address" : "Email ERROR"}
+              name="email"
+              autoComplete="email"
+              autoFocus
+              placeholder='Email'
+              type="email"
+              onChange={(e) => setEmail(e.target.value)}
+              error={errors.email.length > 0 ? errors.email : ''}
+            />
 
-              <span>
-                {errors.email.length > 0 && errors.email}
-              </span>
           </fieldset>
 
           <fieldset>
             <input
+              className='Auth__input'
               name="password"
               label={errors.password.length < 1 ? "Password" : "Password ERROR"}
               id="password"
               autoComplete="current-password"
               type="password"
+              placeholder='Password'
+              value={password}
               onChange={(e) => setPassword(e.target.value)}
               error={errors.password.length > 0 ? errors.password : ''}
             />
 
-              <span>
-                {errors.password.length > 0 && errors.password}
-              </span>
+
           </fieldset>
+          <input
+            className='Auth__input'
+            name="password-confirm"
+            placeholder='Confirm Password'
+            type='password'
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+          />
 
           <button
             type="submit"
-            className="sign-in--email primary-bg"
+            className="Auth__btn"
             onClick={(event) => signInWithProvider(event, "email")}
           >
             Sign Up
@@ -143,34 +167,27 @@ export default function SignUp() {
             <div>
               <Link to="/sign-in">
                 <p
-                  className="display-center"
+                  className="Auth__txt"
                 >
-                  Already have an account?
-                  <button
-                    className="ml-2">
-                      Sign In
-                  </button>
+                  Already have an account? <span className='bold'>Login</span>
                 </p>
               </Link>
             </div>
 
-          <div className="display-center mt-2">
-              <button
-                className="sign-in--google primary-bg"
+            <div className="display-center mt-2">
+
+              <AiFillGoogleCircle
+                className="Auth__google-icon"
                 onClick={(event) => signInWithProvider(event, "google")}
               >
                 <i className="fa fa-google" aria-hidden="true"></i>
-
-                <span className="pl-1">
-                  Sign Up with Google
-                </span>
-              </button>
+              </AiFillGoogleCircle>
             </div>
+            <p className='Auth__google-txt'>Signup with Google</p>
           </div>
         </form>
       </div>
 
-      <Copyright />
     </div>
   );
 }
