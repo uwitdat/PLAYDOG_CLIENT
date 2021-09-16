@@ -19,6 +19,7 @@ import { useSelector } from 'react-redux'
 import ProfilePage from 'pages/ProfilePage/ProfilePage';
 import { useState } from 'react';
 import DogPage from 'pages/DogPage/DogPage';
+import EditProfilePage from 'pages/EditProfilePage/EditProfilePage';
 import Loader from 'components/Loader/Loader';
 
 function App(props) {
@@ -65,7 +66,8 @@ function App(props) {
                 <Route exact path='/dogs' component={DogsPage} />
                 <Route exact path="/dogs/:id" component={DogPage} />
                 <Route path='/new-event' component={NewEventPage} />
-                <Route path="/profile" component={ProfilePage} />
+                <Route exact path="/profile" component={ProfilePage} />
+                <Route exact path="/profile/edit" component={EditProfilePage} />
               </Switch>
               <FooterBar />
             </>

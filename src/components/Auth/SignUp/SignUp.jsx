@@ -35,7 +35,7 @@ export default function SignUp() {
     }
     else if (provider === "email") {
       try {
-        const response = await firebase
+        await firebase
           .createUser({
             email,
             password,
