@@ -63,7 +63,7 @@ const DogsPage = () => {
     }
 
     return (
-        <div className="Dogs">
+        <div className="Dogs container">
             {dogs && dogs.map((dog) => {
                 return (
                     <div className='Dogs__container' key={dog.id}>
