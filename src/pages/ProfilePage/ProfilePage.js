@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
+import { Link } from 'react-router-dom';
 import './ProfilePage.css'
 
 const ProfilePage = () => {
@@ -25,6 +26,7 @@ const ProfilePage = () => {
                 <h4>{profile.displayName}</h4>
                 <p>{auth.email}</p>
                 <p>Last Logged In: {getDate(auth.lastLoginAt)}</p>
+                <Link to="/profile/edit">Edit Profile</Link>
               </div>
             </div>
           </div>
