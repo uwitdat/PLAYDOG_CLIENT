@@ -9,7 +9,7 @@ const fbToken = localStorage.getItem('fb-token')
 let local;
 if (fbToken !== undefined) {
 
-  const headers =  {
+  const headers = {
     "X-CSRFToken": csrfToken,
     "Authorization": `Token ${fbToken}`
   }
