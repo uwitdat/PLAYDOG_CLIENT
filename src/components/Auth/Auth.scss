@@ -1,8 +1,15 @@
+$input-border: 1px solid rgba(128, 128, 128, 0.397);
+$font-secondary: "Inter", sans-serif;
+$font-primary: "Luckiest Guy", cursive;
+$color-gray-dark: rgb(71, 71, 71);
+$color-orange: rgb(207, 102, 3);
+
 .sign-in {
   &--email {
     margin: 2em 0 !important;
 
-    &, * {
+    &,
+    * {
       color: #fff;
       font-weight: 700;
     }
@@ -12,7 +19,8 @@
     padding: 1em 2em !important;
     font-size: 17px !important;
 
-    &, * {
+    &,
+    * {
       color: #fff;
       font-weight: 700;
     }
@@ -29,16 +37,111 @@
 }
 
 .forgot-password {
-    &--email {
+  &--email {
     margin-top: 2em !important;
 
-    &, * {
+    &,
+    * {
       color: #fff;
       font-weight: 700;
     }
   }
+}
 
-  &--back-to-sign-in {
+.Auth {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 80vh;
 
+  &__form {
+    min-width: 38rem;
   }
+
+  &__input {
+    width: 100%;
+    padding: 0.8rem;
+    border-radius: 10px;
+    border: $input-border;
+    margin-top: 1rem;
+  }
+
+  &__input::-webkit-input-placeholder {
+    font-family: $font-secondary;
+  }
+
+  &__input:focus {
+    outline: none;
+    border: 2px solid green;
+  }
+
+  &__btn {
+    width: 100%;
+    margin-top: 1.5rem;
+    padding: 0.8rem;
+    border-radius: 10px;
+    border: $color-orange;
+    font-family: $font-secondary;
+    background-color: $color-orange;
+    color: white;
+    transition: 200ms;
+  }
+
+  &__btn:hover {
+    cursor: pointer;
+    transform: translateY(-2px);
+    box-shadow: rgba(100, 100, 111, 0.13) 0px 7px 29px 0px;
+  }
+
+  &__txt {
+    font-size: 1.3rem;
+    color: black;
+    font-family: $font-secondary;
+    margin-top: 1rem;
+  }
+
+  &__txt:hover {
+    text-decoration: underline;
+  }
+
+  &__google-icon {
+    font-size: 6rem;
+    color: $color-gray-dark;
+    transition: 200ms;
+  }
+
+  &__google-icon:hover {
+    cursor: pointer;
+    transform: translateY(-2px);
+  }
+
+  &__google-txt {
+    font-size: 1.2rem;
+    font-family: $font-secondary;
+  }
+}
+
+.Auth > h5 {
+  font-size: 3rem;
+  font-family: $font-primary;
+  margin: 5rem 0;
+  color: $color-gray-dark;
+}
+
+.blue {
+  color: blue;
+  font-size: 1.1rem;
+}
+
+.bold {
+  font-weight: bolder;
+}
+
+.err {
+  font-size: 1.5rem;
+  font-family: $font-secondary;
+  color: red;
+  font-style: italic;
 }

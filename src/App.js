@@ -6,8 +6,6 @@ import HomePage from 'pages/HomePage/HomePage';
 import EventsPage from 'pages/EventsPage/EventsPage';
 import DogsPage from 'pages/DogsPage/DogsPage';
 import NewEventPage from 'pages/NewEventPage/NewEventPage';
-import LoginPage from 'pages/LoginPage/LoginPage';
-// import LandingPage from 'pages/LandingPage/LandingPage';
 import SignIn from "components/Auth/SignIn/SignIn";
 import SignUp from "./components/Auth/SignUp/SignUp";
 import ForgotPassword from "components/Auth/ForgotPassword/ForgotPassword";
@@ -16,15 +14,30 @@ import { connect, useDispatch } from "react-redux";
 import { useEffect } from 'react';
 import HeaderBar from 'components/HeaderBar/HeaderBar';
 import FooterBar from 'components/FooterBar/FooterBar';
-import { useLocation, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
+import { useSelector } from 'react-redux'
+import ProfilePage from 'pages/ProfilePage/ProfilePage';
+import { useState } from 'react';
+import DogPage from 'pages/DogPage/DogPage';
+import EditProfilePage from 'pages/EditProfilePage/EditProfilePage';
+import Loader from 'components/Loader/Loader';
+import Dashboard from 'pages/Dashboard/Dashboard';
+
 function App(props) {
-  const location = useLocation()
-  const pathName = location.pathname
+
+  const profile = useSelector((state) => state.firebase.auth);
   const dispatch = useDispatch()
+  const [loading, setLoading] = useState(true);
+
+  //CONTROLS LOADER ANIM DURATION
+  useEffect(() => {
+    setTimeout(function () {
+      setLoading(false);
+    }, 3000);
+  }, []);
 
   useEffect(() => {
     dispatch({ type: SET_WINDOW_WIDTH })
-
     window.addEventListener('resize', () => dispatch({ type: SET_WINDOW_WIDTH }))
 
     return () => window.removeEventListener('resize', () => dispatch({ type: SET_WINDOW_WIDTH }))
@@ -33,22 +46,36 @@ function App(props) {
 
   return (
     <div className="App">
+      <script crossOrigin="anonymous" src="https://kit.fontawesome.com/831259ec93.js"></script>
       <>
-        <HeaderBar />
-
-        <Switch>
-          <Route exact path='/' component={HomePage} />
-          {/* <Route path="/welcome" component={LandingPage} /> */}
-          <Route path='/events' component={EventsPage} />
-          <Route path='/dogs' component={DogsPage} />
-          <Route path='/new-event' component={NewEventPage} />
-          <Route path='/login' component={LoginPage} />
-          <Route exact path="/sign-in" component={SignIn} />
-          <Route exact path="/sign-up" component={SignUp} />
-          <Route exact path="/forgot-password" component={ForgotPassword} />
-        </Switch>
-
-        <FooterBar />
+        {loading ? (
+          <Loader />
+        ) : (
+          profile.isEmpty ? (
+            <Switch>
+              <Route exact path='/' component={SignIn} />
+              <Route exact path="/sign-in" component={SignIn} />
+              <Route exact path="/sign-up" component={SignUp} />
+              <Route exact path="/forgot-password" component={ForgotPassword} />
+            </Switch>
+          ) : (
+            <>
+              <HeaderBar />
+              <Switch>
+                <Route exact path='/' component={HomePage} />
+                {/* <Route path="/welcome" component={LandingPage} /> */}
+                <Route path='/events' component={EventsPage} />
+                <Route exact path='/dogs' component={DogsPage} />
+                <Route exact path="/dogs/:id" component={DogPage} />
+                <Route path='/new-event' component={NewEventPage} />
+                <Route path="/profile" component={ProfilePage} />
+                <Route exact path="/dashboard" component={Dashboard} />
+                <Route exact path="/profile/edit" component={EditProfilePage} />
+              </Switch>
+              <FooterBar />
+            </>
+          )
+        )}
       </>
     </div>
   )
@@ -58,8 +85,7 @@ App.propTypes = {
 }
 
 const mapStateToProps = (state) => {
-  return {
-  }
+  return {}
 };
 
 export default withRouter(connect(mapStateToProps, {})(App));
