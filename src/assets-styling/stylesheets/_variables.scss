@@ -1,5 +1,12 @@
-$primaryColor: rgb(30, 192, 92);
+$input-border: 1px solid rgba(128, 128, 128, 0.397);
+$font-secondary: "Inter", sans-serif;
+$font-primary: "Luckiest Guy", cursive;
+$color-gray-dark: rgb(71, 71, 71);
+$color-orange: rgb(207, 102, 3);
 
 :root {
-  --primary-color: #{$primaryColor};
+  --primary-color: #{$color-orange};
+  --primary-font: #{$font-primary};
+  --secondary-font: #{$font-secondary};
+  --color-gray-dark: #{$color-gray-dark};
 }
