@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { AiFillGoogleCircle } from 'react-icons/ai';
 import { useFirebase } from "react-redux-firebase";
 import { useHistory, Link } from "react-router-dom";
 import GoogleIcon from 'assets/images/Google_Logo.png'
@@ -35,7 +34,7 @@ export default function SignUp() {
     }
     else if (provider === "email") {
       try {
-        const response = await firebase
+        await firebase
           .createUser({
             email,
             password,

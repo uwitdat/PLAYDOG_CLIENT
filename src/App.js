@@ -20,6 +20,7 @@ import ProfilePage from 'pages/ProfilePage/ProfilePage';
 import { useState } from 'react';
 import DogPage from 'pages/DogPage/DogPage';
 import Loader from 'components/Loader/Loader';
+import Dashboard from 'pages/Dashboard/Dashboard';
 
 function App(props) {
 
@@ -44,6 +45,7 @@ function App(props) {
 
   return (
     <div className="App">
+      <script crossOrigin="anonymous" src="https://kit.fontawesome.com/831259ec93.js"></script>
       <>
         {loading ? (
           <Loader />
@@ -66,6 +68,7 @@ function App(props) {
                 <Route exact path="/dogs/:id" component={DogPage} />
                 <Route path='/new-event' component={NewEventPage} />
                 <Route path="/profile" component={ProfilePage} />
+                <Route exact path="/dashboard" component={Dashboard} />
               </Switch>
               <FooterBar />
             </>

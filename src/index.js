@@ -17,6 +17,7 @@ import firebase from "firebase/app";
 import "assets-styling/stylesheets/main.scss"
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+
 const rrfConfig = {
   userProfile: "users",
   useFirestoreForProfile: true,
