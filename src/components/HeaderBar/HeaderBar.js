@@ -45,6 +45,11 @@ const HeaderBar = () => {
                 <h1 className='HeaderBar__title'>Walki</h1>
             </Link>
             <div className='Mobile-nav'>
+                 <Link to='/dashboard'>
+                    <div onClick={() => setPath('http://localhost:3000/PLAYDOG_CLIENT#/dashboard')} className={path === 'http://localhost:3000/PLAYDOG_CLIENT#/dashboard' ? 'Mobile-nav-elm border-orange' : 'Mobile-nav-elm'}>
+                        <p className={path === 'http://localhost:3000/PLAYDOG_CLIENT#/dashboard' ? 'Mobile-nav-elm__text black' : 'Mobile-nav-elm__text'}>Dashboard</p>
+                    </div>
+                </Link>
                 <Link to='/dogs'>
                     <div onClick={() => setPath('http://localhost:3000/PLAYDOG_CLIENT#/dogs')} className={path === 'http://localhost:3000/PLAYDOG_CLIENT#/dogs' ? 'Mobile-nav-elm border-orange' : 'Mobile-nav-elm'}>
                         <p className={path === 'http://localhost:3000/PLAYDOG_CLIENT#/dogs' ? 'Mobile-nav-elm__text black' : 'Mobile-nav-elm__text'}>View Dogs</p>
