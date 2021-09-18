@@ -4,11 +4,8 @@ import { useHistory, Link } from "react-router-dom";
 // import Notifications from "../../General/Notifications/Notifications";
 import "../Auth.scss";
 import { connect } from 'react-redux';
-<<<<<<< HEAD
 import local from 'api/local';
-=======
 import GoogleIcon from 'assets/images/Google_Logo.png'
->>>>>>> 9b1c5d58027b55ed7377236621c589e9a4d06fd3
 
 function SignIn({ responsive }) {
   const firebase = useFirebase();
