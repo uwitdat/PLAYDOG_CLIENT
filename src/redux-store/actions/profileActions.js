@@ -7,9 +7,8 @@ export const getProfile = (payload) => async (dispatch) => {
   try {
     const response = await local.get(`profiles?user=${id}`)
 
-    console.log(response.data)
     if (response.status === 200) {
-      const results = response.data.results || []
+      const results = response.data.results[0] || []
 
       return dispatch({
         type: SET_PROFILE,
