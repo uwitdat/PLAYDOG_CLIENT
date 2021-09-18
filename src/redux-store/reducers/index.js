@@ -5,12 +5,14 @@ import { firebaseReducer } from "react-redux-firebase";
 import { firestoreReducer } from "redux-firestore";
 import generalReducers from "./generalReducers";
 import profileReducers from "./profileReducers";
+import petReducers from "./petReducers";
 
 export default combineReducers({
-  firebase: firebaseReducer,
+  errors: errorReducer,
   firestore: firestoreReducer,
+  firebase: firebaseReducer,
   general: generalReducers,
   responsive: responsiveReducer,
   profile: profileReducers,
-  errors: errorReducer,
+  pets: petReducers
 });

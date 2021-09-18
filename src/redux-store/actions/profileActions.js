@@ -1,9 +1,7 @@
 import local from "api/local";
 import { SET_ERRORS, SET_PROFILE } from "../types";
 
-export const getProfile = (payload) => async (dispatch) => {
-  const { id } = payload
-
+export const getProfile = ({ id }) => async (dispatch) => {
   try {
     const response = await local.get(`profiles?user=${id}`)
 

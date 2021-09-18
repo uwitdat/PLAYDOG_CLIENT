@@ -12,6 +12,7 @@ class ProfileService {
   getProfile(userid) {
     const id = $store.firebase.profile.id || userid
 
+    console.log('Getting user profile')
     if (id) {
       store.dispatch(getProfile({
         id

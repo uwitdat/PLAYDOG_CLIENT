@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
+import Pet from 'services/Pets';
 import Profile from 'services/Profile';
 import './ProfilePage.css'
 
@@ -7,7 +8,8 @@ const ProfilePage = () => {
   const { auth, profile } = useSelector((state) => state.firebase);
 
   useEffect(() => {
-    Profile.getProfile()
+    if (profile.id) Profile.getProfile(profile.id)
+    Pet.getBulkPets([2])
   }, []);
 
   const getDate = (dateCode) => {
