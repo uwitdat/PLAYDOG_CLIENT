@@ -1,5 +1,6 @@
 import store from "../redux-store/store"
 import { getProfile } from "redux-store/actions/profileActions"
+import Pet from "./Pets"
 const $store = store.getState()
 
 class ProfileService {
@@ -18,6 +19,8 @@ class ProfileService {
         id
       }))
     }
+
+    Pet.getOwnersPets(userid)
   }
 }
 

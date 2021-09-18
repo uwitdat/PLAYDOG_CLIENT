@@ -9,7 +9,6 @@ const ProfilePage = () => {
 
   useEffect(() => {
     if (profile.id) Profile.getProfile(profile.id)
-    Pet.getBulkPets([2])
   }, []);
 
   const getDate = (dateCode) => {

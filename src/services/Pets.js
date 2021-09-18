@@ -1,8 +1,14 @@
 import store from "../redux-store/store"
-import { getBulkPetsByIds } from "redux-store/actions/petActions"
+import { getPetsForOwner, getBulkPetsByIds } from "redux-store/actions/petActions"
 const $store = store.getState()
 
 class PetService {
+
+  getOwnersPets(ownerId) {
+    store.dispatch(getPetsForOwner({
+      id: ownerId
+    }))
+  }
 
   getBulkPets(ids = []) {
 
