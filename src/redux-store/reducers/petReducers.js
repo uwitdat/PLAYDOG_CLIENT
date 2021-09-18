@@ -1,7 +1,8 @@
-import { SET_PETS } from "../types";
+import { CREATE_PET, SET_PETS } from "../types";
 
 const initialState = {
-  pets: []
+  pets: [],
+  newPet: {}
 };
 
 // eslint-disable-next-line
@@ -12,7 +13,11 @@ export default function (state = initialState, action) {
       return {
         ...state,
       };
-
+    case CREATE_PET:
+        state.newPet = action.payload
+      return {
+        ...state,
+      };
     default:
       return state;
   }

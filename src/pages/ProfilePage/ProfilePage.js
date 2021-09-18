@@ -3,12 +3,17 @@ import { useSelector } from 'react-redux'
 import Profile from 'services/Profile';
 import { Link } from 'react-router-dom';
 import './ProfilePage.css'
+import Pet from 'services/Pets';
 
 const ProfilePage = () => {
   const { firebase: { auth, profile }, profile: userProfile } = useSelector((state) => state);
 
   useEffect(() => {
     if (Object.keys(userProfile).length < 1 && profile.id) Profile.getProfile(profile.id)
+    // Pet.createPet({
+    //   "name": "tupi the chicken",
+    //   "owner": 1
+    // })
   }, []);
 
   const getDate = (dateCode) => {

@@ -8,3 +8,4 @@ export const SET_AUTOCOMPLETE_RESULTS = "SET_AUTOCOMPLETE_RESULTS";
 export const RECENT_TICKERS = "RECENT_TICKERS";
 export const SET_PROFILE = "SET_PROFILE";
 export const SET_PETS = "SET_PETS";
+export const CREATE_PET = "CREATE_PET";
