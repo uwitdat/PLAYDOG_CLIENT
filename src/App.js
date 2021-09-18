@@ -19,6 +19,9 @@ import { useSelector } from 'react-redux'
 import ProfilePage from 'pages/ProfilePage/ProfilePage';
 import { useState } from 'react';
 import DogPage from 'pages/DogPage/DogPage';
+import EditProfilePage from 'pages/EditProfilePage/EditProfilePage';
+import Loader from 'components/Loader/Loader';
+import Dashboard from 'pages/Dashboard/Dashboard';
 
 function App(props) {
 
@@ -26,24 +29,28 @@ function App(props) {
   const dispatch = useDispatch()
   const [loading, setLoading] = useState(true);
 
+  //CONTROLS LOADER ANIM DURATION
+  useEffect(() => {
+    setTimeout(function () {
+      setLoading(false);
+    }, 3000);
+  }, []);
+
   useEffect(() => {
     dispatch({ type: SET_WINDOW_WIDTH })
     window.addEventListener('resize', () => dispatch({ type: SET_WINDOW_WIDTH }))
-    setTimeout(function(){
-      setLoading(false);
-    }, 2000);
+
     return () => window.removeEventListener('resize', () => dispatch({ type: SET_WINDOW_WIDTH }))
     // eslint-disable-next-line
   }, [])
 
   return (
     <div className="App">
+      <script crossOrigin="anonymous" src="https://kit.fontawesome.com/831259ec93.js"></script>
       <>
-        {(loading) ? (
-          <div className="loader" style={{width: '100%'}} >
-            <img src="https://static.wixstatic.com/media/d4e6ca_420fa2703afa4fd08cc1906669066a75~mv2.gif" style={{display: 'flex', margin: 'auto'}} alt=".."></img>
-          </div>
-        ): (
+        {loading ? (
+          <Loader />
+        ) : (
           profile.isEmpty ? (
             <Switch>
               <Route exact path='/' component={SignIn} />
@@ -62,6 +69,8 @@ function App(props) {
                 <Route exact path="/dogs/:id" component={DogPage} />
                 <Route path='/new-event' component={NewEventPage} />
                 <Route path="/profile" component={ProfilePage} />
+                <Route exact path="/dashboard" component={Dashboard} />
+                <Route exact path="/profile/edit" component={EditProfilePage} />
               </Switch>
               <FooterBar />
             </>

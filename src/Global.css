@@ -29,7 +29,24 @@ a {
   text-decoration: none !important;
 }
 
-.row>* {
+.row > * {
   padding-right: 0 !important;
   padding-left: 0 !important;
+}
+
+input, select {
+  font-size: 1.5rem !important;
+  height: 31.5px;
+}
+
+button {
+  font-size: 1.5rem !important;
+}
+
+p {
+  margin-bottom: 0rem !important;
+}
+
+.container {
+  padding-top: 100px;
 }

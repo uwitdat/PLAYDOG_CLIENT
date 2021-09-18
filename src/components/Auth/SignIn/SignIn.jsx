@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import { useFirebase } from "react-redux-firebase";
 import { useHistory, Link } from "react-router-dom";
-import { AiFillGoogleCircle } from 'react-icons/ai';
 // import Notifications from "../../General/Notifications/Notifications";
 import "../Auth.scss";
 import { connect } from 'react-redux';
+<<<<<<< HEAD
 import local from 'api/local';
+=======
+import GoogleIcon from 'assets/images/Google_Logo.png'
+>>>>>>> 9b1c5d58027b55ed7377236621c589e9a4d06fd3
 
 function SignIn({ responsive }) {
   const firebase = useFirebase();
@@ -180,13 +183,16 @@ function SignIn({ responsive }) {
             </div>
 
             <div className="display-center mt-2">
-              <AiFillGoogleCircle
+              <img src={GoogleIcon} style={{ height: '5rem' }} alt='#' className="Auth__google-icon" onClick={(event) => signInWithProvider(event, "google")} />
+              <i className="fa fa-google" aria-hidden="true"></i>
+
+              {/* <AiFillGoogleCircle
                 className="Auth__google-icon"
                 onClick={(event) => signInWithProvider(event, "google")}
               >
                 <i className="fa fa-google" aria-hidden="true"></i>
 
-              </AiFillGoogleCircle>
+              </AiFillGoogleCircle>*/}
             </div>
             <p className='Auth__google-txt'>Login with Google</p>
           </div>

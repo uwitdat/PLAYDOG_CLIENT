@@ -3,9 +3,12 @@
   height: 6rem;
   margin-bottom: 2rem;
   display: flex;
+  justify-content: space-between;
   align-items: center;
   background-color: var(--color-grey-light);
   box-shadow: rgba(99, 99, 99, 0.075) 0px 2px 8px 0px;
+  position: fixed;
+  z-index: 1;
 }
 
 .HeaderBar__title {
@@ -14,6 +17,8 @@
   margin-left: 1rem;
   letter-spacing: 1px;
   text-shadow: -2px 2px 0px #00e6e6, -5px 5px 0px #01cccc;
+  font-size: 3.5rem;
+  margin-bottom: -0.5rem;
 }
 
 .Mobile-nav {
@@ -64,4 +69,18 @@
 
 .black {
   color: black !important;
+}
+
+.user-profile-icon {
+  font-size: 3.2rem;
+  margin-right: 1rem;
+  display: flex;
+  color: var(--color-grey-dark);
+  transition: 300ms;
+}
+
+@media only screen and (min-width: 700px) {
+  .user-profile-icon {
+    display: none;
+  }
 }
