@@ -5,7 +5,7 @@ import { AiFillGoogleCircle } from 'react-icons/ai';
 // import Notifications from "../../General/Notifications/Notifications";
 import "../Auth.scss";
 import { connect } from 'react-redux';
-import { Container, Row, Form, Col } from 'react-bootstrap';
+import local from 'api/local';
 
 function SignIn({ responsive }) {
   const firebase = useFirebase();
@@ -32,13 +32,41 @@ function SignIn({ responsive }) {
           password: userPassword,
         })
 
-      console.log(response)
-      const token = await firebase.auth().currentUser.getIdToken()
-      localStorage.setItem('fb-token', token)
-      history.push("/");
+        const newUserEmail = response.profile.email || ''
 
+        if (provider !== "email" && newUserEmail.length > 0) {
+          try {
+            const newUser = await local.post('/users/', {
+              username: newUserEmail,
+              email: newUserEmail
+            })
+
+            if (newUser.data.id) {
+              await firebase.updateProfile({
+                "id": newUser.data.id
+              })
+            }
+
+            if (newUser.data.status !== 409) {
+              const token = await firebase.auth().currentUser.getIdToken()
+              localStorage.setItem('fb-token', token)
+              history.push("/");
+            } else {
+              setErrors({
+                "email": errors.email,
+                "password": errors.password,
+                "error": "User already exists."
+              });
+            }
+          } catch (err) {
+            setErrors({
+              "email": errors.email,
+              "password": errors.password,
+              "error": err
+            });
+          }
+        }
     } catch (err) {
-      console.log(err)
       console.log(`Error: ${err.message}`)
       if (err.code?.includes('email')) {
         setErrors({

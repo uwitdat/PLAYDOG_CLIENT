@@ -1,3 +1,4 @@
+import local from 'api/local';
 import React, { useState } from 'react';
 import { AiFillGoogleCircle } from 'react-icons/ai';
 import { useFirebase } from "react-redux-firebase";
@@ -34,11 +35,22 @@ export default function SignUp() {
     }
     else if (provider === "email") {
       try {
-        const response = await firebase
+        await firebase
           .createUser({
             email,
             password,
           })
+
+          const newUser = await local.post('/users/', {
+            username: email,
+            email
+          })
+
+        if (newUser.data.id) {
+          await firebase.updateProfile({
+            "id": newUser.data.id
+          })
+        }
 
         const token = await firebase.auth().currentUser.getIdToken()
         localStorage.setItem('fb-token', token)
@@ -74,10 +86,41 @@ export default function SignUp() {
             password: userPassword,
           })
 
-        console.log(response)
-        const token = await firebase.auth().currentUser.getIdToken()
-        localStorage.setItem('fb-token', token)
-        history.push("/");
+        const newUserEmail = response.profile.email || ''
+
+        if (newUserEmail.length > 0) {
+          try {
+            const newUser = await local.post('/users/', {
+              username: newUserEmail,
+              email: newUserEmail
+            })
+
+            if (newUser.data.id) {
+              await firebase.updateProfile({
+                "id": newUser.data.id
+              })
+            }
+
+            if (newUser.data.status !== 409) {
+              const token = await firebase.auth().currentUser.getIdToken()
+              localStorage.setItem('fb-token', token)
+              history.push("/");
+            } else {
+              setErrors({
+                "email": errors.email,
+                "password": errors.password,
+                "error": "User already exists."
+              });
+            }
+          } catch (err) {
+            setErrors({
+              "email": errors.email,
+              "password": errors.password,
+              "error": err
+            });
+          }
+        }
+
       } catch (err) {
         if (err.code?.includes('email')) {
           setErrors({

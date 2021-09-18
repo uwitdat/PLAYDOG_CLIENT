@@ -1,21 +1,24 @@
 import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
+import Profile from 'services/Profile';
 import './ProfilePage.css'
 
 const ProfilePage = () => {
   const { auth, profile } = useSelector((state) => state.firebase);
-  
-  useEffect(() => {}, []);
+
+  useEffect(() => {
+    Profile.getProfile()
+  }, []);
 
   const getDate = (dateCode) => {
-    return dateCode ? (new Date(parseInt(dateCode))).toDateString() : ""; 
+    return dateCode ? (new Date(parseInt(dateCode))).toDateString() : "";
   }
 
   return (
     <div className="container profile-section">
       <div className="row">
         <div className="col-xs-12 col-sm-9">
-        
+
           <div className="panel panel-default">
             <div className="panel-body">
               <div className="profile__avatar">
@@ -94,7 +97,7 @@ const ProfilePage = () => {
           </div>
 
         </div>
-        <div className="col-xs-12 col-sm-3" style={{paddingTop: '5%'}}>          
+        <div className="col-xs-12 col-sm-3" style={{paddingTop: '5%'}}>
           <div className="profile__contact-info">
             <div className="profile__contact-info-item">
               <div className="profile__contact-info-icon">
@@ -126,7 +129,7 @@ const ProfilePage = () => {
           </div>
 
         </div>
-      </div>       
+      </div>
     </div>
   )
 }
