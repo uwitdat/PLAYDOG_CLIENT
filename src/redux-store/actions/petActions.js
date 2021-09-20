@@ -1,7 +1,7 @@
 import local from "api/local";
 import { SET_ERRORS, SET_OWNER_PETS, CREATE_PET, UPDATE_PET, DELETE_PET, SET_PETS, SET_BULK_PETS } from "../types";
 
-export const getPetsForOwner = ({ id }) => async (dispatch) => {
+export const _getPetsForOwner = ({ id }) => async (dispatch) => {
   try {
     const response = await local.get(`/pets?owner=${id}`)
 
@@ -17,7 +17,7 @@ export const getPetsForOwner = ({ id }) => async (dispatch) => {
   }
 };
 
-export const getAllPets = () => async (dispatch) => {
+export const _getAllPets = () => async (dispatch) => {
   try {
     const response = await local.get('/pets/')
 
@@ -33,7 +33,7 @@ export const getAllPets = () => async (dispatch) => {
   }
 };
 
-export const getBulkPetsByIds = ({ ids }) => async (dispatch) => {
+export const _getBulkPetsByIds = ({ ids }) => async (dispatch) => {
   try {
     const response = await local.post('/pets/', {
       search: true,
@@ -52,7 +52,7 @@ export const getBulkPetsByIds = ({ ids }) => async (dispatch) => {
   }
 };
 
-export const createNewPet = (petData) => async (dispatch) => {
+export const _createNewPet = (petData) => async (dispatch) => {
   try {
     const response = await local.post('/pets/', petData)
 
@@ -68,7 +68,7 @@ export const createNewPet = (petData) => async (dispatch) => {
   }
 };
 
-export const updatePetById = (id, petData) => async (dispatch) => {
+export const _updatePetById = (id, petData) => async (dispatch) => {
   try {
     const response = await local.put(`/pets/${id}/`, petData)
 
@@ -84,7 +84,7 @@ export const updatePetById = (id, petData) => async (dispatch) => {
   }
 };
 
-export const deletePetById = (id) => async (dispatch) => {
+export const _deletePetById = (id) => async (dispatch) => {
   try {
     const response = await local.delete(`/pets/${id}/`)
 
