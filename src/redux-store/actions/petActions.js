@@ -1,5 +1,5 @@
 import local from "api/local";
-import { SET_ERRORS, SET_PETS, CREATE_PET } from "../types";
+import { SET_ERRORS, SET_PETS, CREATE_PET, UPDATE_PET } from "../types";
 
 export const getPetsForOwner = ({ id }) => async (dispatch) => {
   try {
@@ -36,14 +36,30 @@ export const getBulkPetsByIds = ({ ids }) => async (dispatch) => {
   }
 };
 
-export const createPet = (petData) => async (dispatch) => {
+export const createNewPet = (petData) => async (dispatch) => {
   try {
-    console.log(petData)
     const response = await local.post('/pets/', petData)
 
-      console.log(response, petData)
     return dispatch({
       type: CREATE_PET,
+      payload: response.data,
+    })
+  } catch (err) {
+    return dispatch({
+      type: SET_ERRORS,
+      payload: err
+    })
+  }
+};
+
+export const updatePetById = (id, petData) => async (dispatch) => {
+  try {
+    console.log("LINE 57:", id, petData)
+    const response = await local.put(`/pets/${id}/`, petData)
+
+    console.log("UPDATE 60:", response, id, petData)
+    return dispatch({
+      type: UPDATE_PET,
       payload: response.data,
     })
   } catch (err) {

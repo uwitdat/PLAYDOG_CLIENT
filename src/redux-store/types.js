@@ -9,3 +9,4 @@ export const RECENT_TICKERS = "RECENT_TICKERS";
 export const SET_PROFILE = "SET_PROFILE";
 export const SET_PETS = "SET_PETS";
 export const CREATE_PET = "CREATE_PET";
+export const UPDATE_PET = "UPDATE_PET";

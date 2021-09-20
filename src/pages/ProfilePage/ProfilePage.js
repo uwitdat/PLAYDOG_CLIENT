@@ -10,8 +10,8 @@ const ProfilePage = () => {
 
   useEffect(() => {
     if (Object.keys(userProfile).length < 1 && profile.id) Profile.getProfile(profile.id)
-    // Pet.createPet({
-    //   "name": "tupi the chicken",
+    // Pet.updatePet(1, {
+    //   "name": "tupi the pony",
     //   "owner": 1
     // })
   }, []);

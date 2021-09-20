@@ -1,5 +1,6 @@
 import store from "../redux-store/store"
-import { getPetsForOwner, getBulkPetsByIds, createPet } from "redux-store/actions/petActions"
+import { getPetsForOwner, getBulkPetsByIds, createNewPet, updatePetById } from "redux-store/actions/petActions"
+
 class PetService {
 
   getOwnersPets(ownerId) {
@@ -15,7 +16,11 @@ class PetService {
   }
 
   createPet(petData) {
-    store.dispatch(createPet(petData))
+    store.dispatch(createNewPet(petData))
+  }
+
+  updatePet(id, petData) {
+    store.dispatch(updatePetById(id, petData))
   }
 }
 
