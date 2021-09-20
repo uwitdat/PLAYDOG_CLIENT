@@ -1,15 +1,16 @@
 import local from "api/local";
-import { SET_ERRORS, SET_PROFILE } from "../types";
+import { SET_ERRORS, SET_USER_PROFILE } from "../types";
 
-export const getProfile = ({ id }) => async (dispatch) => {
+export const getProfile = (id) => async (dispatch) => {
   try {
     const response = await local.get(`profiles?user=${id}`)
 
     if (response.status === 200) {
       const results = response.data.results[0] || []
 
+      console.log(results)
       return dispatch({
-        type: SET_PROFILE,
+        type: SET_USER_PROFILE,
         payload: results,
       })
     }

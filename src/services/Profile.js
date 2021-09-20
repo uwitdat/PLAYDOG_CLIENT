@@ -10,17 +10,15 @@ class ProfileService {
     this.profile = profile
   }
 
-  getProfile(userid) {
+  getProfile(userid, includePets) {
     const id = $store.firebase.profile.id || userid
 
     console.log('Getting user profile')
     if (id) {
-      store.dispatch(getProfile({
-        id
-      }))
+      store.dispatch(getProfile(id))
     }
 
-    Pet.getOwnersPets(userid)
+    includePets && Pet.getOwnersPets(userid)
   }
 }
 

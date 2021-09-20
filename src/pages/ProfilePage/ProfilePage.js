@@ -5,10 +5,10 @@ import { Link } from 'react-router-dom';
 import './ProfilePage.css'
 
 const ProfilePage = () => {
-  const { firebase: { auth, profile }, profile: userProfile } = useSelector((state) => state);
+  const { firebase: { auth, profile }, profile: { profile: userProfile } } = useSelector((state) => state);
 
   useEffect(() => {
-    if (Object.keys(userProfile).length < 1 && profile.id) Profile.getProfile(profile.id)
+    if (profile.id && Object.keys(userProfile).length < 1) Profile.getProfile(profile.id)
   }, []);
 
   const getDate = (dateCode) => {
