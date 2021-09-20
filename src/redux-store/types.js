@@ -10,3 +10,4 @@ export const SET_PROFILE = "SET_PROFILE";
 export const SET_PETS = "SET_PETS";
 export const CREATE_PET = "CREATE_PET";
 export const UPDATE_PET = "UPDATE_PET";
+export const DELETE_PET = "DELETE_PET";
