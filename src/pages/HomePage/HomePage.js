@@ -24,6 +24,7 @@ const HomePage = () => {
     useEffect(() => {
         getDogs()
     }, [])
+
     return (
 
         <div className='HomePage__container'>
