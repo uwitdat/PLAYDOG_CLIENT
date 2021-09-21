@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Card, Col, Row, Form, Button, Tabs, Tab } from 'react-bootstrap';
+import { Card, Col, Row, Tabs, Tab } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import "./EditProfilePage.scss"
 import ProfileForm from './ProfileForm';
 import ProfilePets from './ProfilePets';
@@ -35,7 +35,7 @@ const EditProfilePage = () => {
 
   useEffect(() => {
     setUserProfile(profile);
-
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

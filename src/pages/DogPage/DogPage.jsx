@@ -7,18 +7,18 @@ const DogPage = () => {
   const { id } = useParams();
   const [dog, setDog] = useState({});
 
-  const getDog = async () => {
-    try {
-        const response = await local.get('/pets/' + id)
-        
-        setDog(response.data);
-    } catch(err) {
-        console.log(err)
-    }
-}
-  
   useEffect(() => {
-    setDog(getDog());
+    const getDog = async () => {
+      try {
+        const response = await local.get('/pets/' + id)
+          
+        setDog(response.data);
+      } catch(err) {
+        console.log(err)
+      }
+    }
+    getDog();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

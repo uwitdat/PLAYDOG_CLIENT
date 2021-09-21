@@ -1,12 +1,12 @@
 import local from 'api/local'
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
+// import { useSelector } from 'react-redux'
 import Breeds from './Breeds'
 import { FaPaw } from 'react-icons/fa'
 import './DogsPage.scss'
 
 const DogsPage = () => {
-  const profile = useSelector((state) => state.firebase.auth);
+  // const profile = useSelector((state) => state.firebase.auth);
 
   const [dogs, setDogs] = useState([]);
 

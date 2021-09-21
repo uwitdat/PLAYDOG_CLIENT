@@ -12,6 +12,8 @@ const ProfilePage = () => {
     if (profile.id && Object.keys(userProfile).length < 1) Profile.getProfileByUserId(profile.id)
     Profile.getProfileById(31)
     // Pet.getPets()
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const getDate = (dateCode) => {
