@@ -1,21 +1,34 @@
 import store from "../redux-store/store"
-import { getPetsForOwner, getBulkPetsByIds, createPet } from "redux-store/actions/petActions"
+import { _getPetsForOwner, _getBulkPetsByIds, _getAllPets, _createNewPet, _updatePetById, _deletePetById } from "redux-store/actions/petActions"
+
 class PetService {
 
-  getOwnersPets(ownerId) {
-    store.dispatch(getPetsForOwner({
+  getPetsForOwner(ownerId) {
+    store.dispatch(_getPetsForOwner({
       id: ownerId
     }))
   }
 
-  getBulkPets(ids = []) {
-    store.dispatch(getBulkPetsByIds({
+  getBulkPetsByIds(ids = []) {
+    store.dispatch(_getBulkPetsByIds({
       ids
     }))
   }
 
-  createPet(petData) {
-    store.dispatch(createPet(petData))
+  getAllPets(petData) {
+    store.dispatch(_getAllPets(petData))
+  }
+
+  createNewPet(petData) {
+    store.dispatch(_createNewPet(petData))
+  }
+
+  updatePetById(id, petData) {
+    store.dispatch(_updatePetById(id, petData))
+  }
+
+  deletePetById(id) {
+    store.dispatch(_deletePetById(id))
   }
 }
 
