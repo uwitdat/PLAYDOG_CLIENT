@@ -68,9 +68,9 @@ function App(props) {
                 <Route exact path='/dogs' component={DogsPage} />
                 <Route exact path="/dogs/:id" component={DogPage} />
                 <Route path='/new-event' component={NewEventPage} />
-                <Route path="/profile" component={ProfilePage} />
-                <Route exact path="/dashboard" component={Dashboard} />
+                <Route exact path="/profile" component={ProfilePage} />
                 <Route exact path="/profile/edit" component={EditProfilePage} />
+                <Route exact path="/dashboard" component={Dashboard} />
               </Switch>
               <FooterBar />
             </>
