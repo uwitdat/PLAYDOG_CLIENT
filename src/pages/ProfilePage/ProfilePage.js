@@ -3,15 +3,12 @@ import { useSelector } from 'react-redux'
 import Profile from 'services/Profile';
 import { Link } from 'react-router-dom';
 import './ProfilePage.css'
-// import Pet from 'services/Pets';
 
 const ProfilePage = () => {
   const { firebase: { auth, profile }, profile: { profile: userProfile } } = useSelector((state) => state);
 
   useEffect(() => {
-    if (profile.id && Object.keys(userProfile).length < 1) Profile.getProfileByUserId(profile.id)
-    Profile.getProfileById(31)
-    // Pet.getPets()
+    if (profile.id && Object.keys(userProfile).length < 1) Profile.getProfileByUserId(profile.id, true)
   }, []);
 
   const getDate = (dateCode) => {

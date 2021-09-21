@@ -1,8 +1,9 @@
-import { SET_USER_PROFILE, SET_PROFILES } from "../types";
+import { SET_USER_PROFILE, SET_PROFILES, UPDATE_PROFILE } from "../types";
 
 const initialState = {
   profile: {},
-  profiles: []
+  profiles: [],
+  updatedProfile: {}
 };
 
 // eslint-disable-next-line
@@ -15,6 +16,11 @@ export default function (state = initialState, action) {
       };
     case SET_PROFILES:
       state.profiles = action.payload
+      return {
+        ...state,
+      };
+    case UPDATE_PROFILE:
+      state.updatedProfile = action.payload
       return {
         ...state,
       };

@@ -1,5 +1,5 @@
 import store from "../redux-store/store"
-import { _getAllProfiles, _getProfileByUserId, _getProfileById } from "redux-store/actions/profileActions"
+import { _getAllProfiles, _getProfileByUserId, _getProfileById, _updateProfileById } from "redux-store/actions/profileActions"
 import Pet from "./Pets"
 const $store = store.getState()
 
@@ -11,7 +11,7 @@ class ProfileService {
       store.dispatch(_getProfileByUserId(id))
     }
 
-    includePets && Pet.getOwnersPets(userid)
+    includePets && Pet.getPetsForOwner(userid)
   }
 
   getAllProfiles() {
@@ -20,6 +20,10 @@ class ProfileService {
 
   getProfileById(id) {
     store.dispatch(_getProfileById(id))
+  }
+
+  updateProfileById(id) {
+    store.dispatch(_updateProfileById(id))
   }
 }
 
