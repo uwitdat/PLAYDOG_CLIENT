@@ -17,7 +17,7 @@ const ProfilePage = ({ auth, profile }) => {
 
           <div className="panel panel-default">
             <div className="panel-body">
-              {profile && auth && (
+              {auth && profile && (
                 <>
                   <div className="profile__avatar">
                     {profile.avatar_url && profile.avatar_url.as_url && (
