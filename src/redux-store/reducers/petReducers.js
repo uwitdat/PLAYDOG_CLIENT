@@ -1,7 +1,8 @@
-import { CREATE_PET, DELETE_PET, SET_OWNER_PETS, SET_PETS, UPDATE_PET, SET_BULK_PETS} from "../types";
+import { CREATE_PET, DELETE_PET, SET_OWNER_PETS, SET_PETS, UPDATE_PET, SET_BULK_PETS } from "../types";
 
 const initialState = {
   pets: [],
+  petsResponse: {},
   ownerPets: [],
   bulkPets: [],
   newPet: {},
@@ -13,32 +14,35 @@ const initialState = {
 export default function (state = initialState, action) {
   switch (action.type) {
     case SET_PETS:
-        state.pets = action.payload
+      state.pets = action.payload.results
+      state.petsResponse = action.payload
       return {
         ...state,
       };
+
     case SET_OWNER_PETS:
-        state.ownerPets = action.payload
+      state.ownerPets = action.payload
       return {
         ...state,
       };
     case SET_BULK_PETS:
-        state.bulkPets = action.payload
+      state.bulkPets = action.payload
       return {
         ...state,
       };
     case CREATE_PET:
-        state.newPet = action.payload
+      state.newPet = action.payload
+      state.pets = [...state.pets, action.payload]
       return {
         ...state,
       };
     case UPDATE_PET:
-        state.updatedPet = action.payload
+      state.updatedPet = action.payload
       return {
         ...state,
       };
     case DELETE_PET:
-        state.deletedStatus = action.payload
+      state.deletedStatus = action.payload
       return {
         ...state,
       };

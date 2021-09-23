@@ -1,14 +1,12 @@
-import local from 'api/local'
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { connect } from 'react-redux'
 import Breeds from './Breeds'
 import { FaPaw } from 'react-icons/fa'
 import './DogsPage.scss'
+import Pet from 'services/Pets'
 
-const DogsPage = () => {
-  const profile = useSelector((state) => state.firebase.auth);
 
-  const [dogs, setDogs] = useState([]);
+const DogsPage = ({ user, dogs }) => {
 
   const [hideForm, setHideForm] = useState(true)
 
@@ -20,42 +18,37 @@ const DogsPage = () => {
     size: 'S',
     gender: 'M',
     image: null,
-    co_owners: ["http://localhost:8000/api/users/1/"],
-    owner: "http://localhost:8000/api/users/1/"
+    owner: ''
   })
 
-  const getDogs = async () => {
-    try {
-      const response = await local.get('/pets/')
-      setDogs(response.data.results);
-    } catch (err) {
-      console.log(err)
-    }
-  }
   useEffect(() => {
-    getDogs()
+    Pet.getAllPets()
+  }, [])
+
+  useEffect(() => {
+    if (Object.keys(user).includes(`id`)) {
+      setNewDog({
+        ...newDog,
+        owner: user.id
+      }
+      )
+    }
   }, [])
 
   //RESET INPUT FIELDS AFTER SUBMISSION
-  const clear = () => {
-    setNewDog({
-      name: '',
-      breed: '',
-      age: '',
-      description: '',
-      size: 'S',
-      gender: 'M',
-      image: null,
-      co_owners: ["http://localhost:8000/api/users/1/"],
-      owner: "http://localhost:8000/api/users/1/"
-    })
-  }
 
-  const handleOnSubmit = async (e) => {
+
+  const handleOnSubmit = (e) => {
+    let createNewDog = newDog
+    createNewDog.owner = user.id
+
     e.preventDefault()
-    const result = await local.post('/pets/', newDog)
-    setDogs([...dogs, result.data])
-    clear()
+    console.log('NEWDOG++>', createNewDog)
+    if (user.id !== '') {
+      Pet.createNewPet(createNewDog)
+    } else {
+      console.log('ERROR')
+    }
   }
 
   const handleRevealForm = () => {
@@ -181,4 +174,18 @@ const DogsPage = () => {
   )
 }
 
-export default DogsPage
+DogsPage.propTypes = {
+}
+
+const mapStateToProps = (state) => {
+
+  return {
+    newPet: state.pets.newPet,
+    user: state.firebase.profile,
+    dogs: state.pets.pets
+  }
+
+};
+
+export default connect(mapStateToProps, {})(DogsPage);
+
