@@ -22,18 +22,27 @@ import DogPage from 'pages/DogPage/DogPage';
 import EditProfilePage from 'pages/EditProfilePage/EditProfilePage';
 import Loader from 'components/Loader/Loader';
 import Dashboard from 'pages/Dashboard/Dashboard';
+import Profile from 'services/Profile';
 
 function App(props) {
 
-  const profile = useSelector((state) => state.firebase.auth);
+
   const dispatch = useDispatch()
   const [loading, setLoading] = useState(true);
 
   //CONTROLS LOADER ANIM DURATION
+  // useEffect(() => {
+  //   setTimeout(function () {
+  //     setLoading(false);
+  //   }, 3000);
+  // }, []);
+
+  const { firebase: { auth, profile }, profile: { profile: userProfile } } = useSelector((state) => state);
+
   useEffect(() => {
-    setTimeout(function () {
-      setLoading(false);
-    }, 3000);
+    // if (profile.id && Object.keys(userProfile).length < 1) Profile.getProfileByUserId(profile.id)
+    Profile.getProfileByUserId(profile.id)
+    setLoading(false);
   }, []);
 
   useEffect(() => {
@@ -51,7 +60,7 @@ function App(props) {
         {loading ? (
           <Loader />
         ) : (
-          profile.isEmpty ? (
+          userProfile.isEmpty ? (
             <Switch>
               <Route exact path='/' component={SignIn} />
               <Route exact path="/sign-in" component={SignIn} />

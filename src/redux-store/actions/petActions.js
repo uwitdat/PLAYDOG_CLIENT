@@ -12,7 +12,7 @@ export const _getPetsForOwner = ({ id }) => async (dispatch) => {
   } catch (err) {
     return dispatch({
       type: SET_ERRORS,
-      payload: err.response.data
+      payload: err
     })
   }
 };
@@ -28,7 +28,7 @@ export const _getAllPets = () => async (dispatch) => {
   } catch (err) {
     return dispatch({
       type: SET_ERRORS,
-      payload: err.response.data
+      payload: err
     })
   }
 };
@@ -47,7 +47,7 @@ export const _getBulkPetsByIds = ({ ids }) => async (dispatch) => {
   } catch (err) {
     return dispatch({
       type: SET_ERRORS,
-      payload: err.response.data
+      payload: err
     })
   }
 };
@@ -63,7 +63,7 @@ export const _createNewPet = (petData) => async (dispatch) => {
   } catch (err) {
     return dispatch({
       type: SET_ERRORS,
-      payload: err.response.data
+      payload: err
     })
   }
 };
@@ -79,7 +79,7 @@ export const _updatePetById = (id, petData) => async (dispatch) => {
   } catch (err) {
     return dispatch({
       type: SET_ERRORS,
-      payload: err.response.data
+      payload: err
     })
   }
 };
@@ -95,7 +95,7 @@ export const _deletePetById = (id) => async (dispatch) => {
   } catch (err) {
     return dispatch({
       type: SET_ERRORS,
-      payload: err.response.data
+      payload: err
     })
   }
 };

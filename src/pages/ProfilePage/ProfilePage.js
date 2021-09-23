@@ -7,10 +7,6 @@ import './ProfilePage.css'
 const ProfilePage = () => {
   const { firebase: { auth, profile }, profile: { profile: userProfile } } = useSelector((state) => state);
 
-  useEffect(() => {
-    if (profile.id && Object.keys(userProfile).length < 1) Profile.getProfileByUserId(profile.id, true)
-  }, []);
-
   const getDate = (dateCode) => {
     return dateCode ? (new Date(parseInt(dateCode))).toDateString() : "";
   }
