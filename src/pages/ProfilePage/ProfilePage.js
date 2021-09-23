@@ -1,11 +1,10 @@
-import React, { useEffect } from 'react'
-import { useSelector } from 'react-redux'
-import Profile from 'services/Profile';
+import React from 'react'
+import { connect } from 'react-redux'
 import { Link } from 'react-router-dom';
+import PropTypes from "prop-types";
 import './ProfilePage.css'
 
-const ProfilePage = () => {
-  const { firebase: { auth, profile }, profile: { profile: userProfile } } = useSelector((state) => state);
+const ProfilePage = ({ auth, profile }) => {
 
   const getDate = (dateCode) => {
     return dateCode ? (new Date(parseInt(dateCode))).toDateString() : "";
@@ -18,15 +17,21 @@ const ProfilePage = () => {
 
           <div className="panel panel-default">
             <div className="panel-body">
-              <div className="profile__avatar">
-                <img src={profile.avatarUrl} alt="avater" />
-              </div>
-              <div className="profile__header">
-                <h4>{profile.displayName}</h4>
-                <p>{auth.email}</p>
-                <p>Last Logged In: {getDate(auth.lastLoginAt)}</p>
-                <Link to="/profile/edit">Edit Profile</Link>
-              </div>
+              {profile && auth && (
+                <>
+                  <div className="profile__avatar">
+                    {profile.avatar_url && profile.avatar_url.as_url && (
+                      <img src={profile.avatar_url.as_url} alt="avater" />
+                    )}
+                  </div>
+                  <div className="profile__header">
+                    <h4>{profile.display_name}</h4>
+                    <p>{profile.email}</p>
+                    <p>Last Logged In: {getDate(auth.lastLoginAt)}</p>
+                    <Link to="/profile/edit">Edit Profile</Link>
+                  </div>
+                </>
+              )}
             </div>
           </div>
 
@@ -132,4 +137,19 @@ const ProfilePage = () => {
   )
 }
 
-export default ProfilePage;
+
+ProfilePage.propTypes = {
+  auth: PropTypes.object,
+  profile: PropTypes.object
+}
+
+const mapStateToProps = (state) => {
+  return {
+    auth: {
+      lastLoginAt: state.firebase.auth.lastLoginAt
+    },
+    profile: state.profile.profile,
+  }
+};
+
+export default connect(mapStateToProps, {})(ProfilePage);

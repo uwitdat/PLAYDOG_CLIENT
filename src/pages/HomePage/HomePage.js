@@ -4,13 +4,13 @@ import Loader from 'components/Loader/Loader'
 import './HomePage.css'
 
 const HomePage = () => {
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
 
-    useEffect(() => {
-        setTimeout(function () {
-            setLoading(false);
-        }, 3000);
-    }, []);
+    // useEffect(() => {
+    //     setTimeout(function () {
+    //         setLoading(false);
+    //     }, 3000);
+    // }, []);
 
     const getDogs = async () => {
         try {

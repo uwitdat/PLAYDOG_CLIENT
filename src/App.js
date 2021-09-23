@@ -15,7 +15,6 @@ import { useEffect } from 'react';
 import HeaderBar from 'components/HeaderBar/HeaderBar';
 import FooterBar from 'components/FooterBar/FooterBar';
 import { withRouter } from "react-router-dom";
-import { useSelector } from 'react-redux'
 import ProfilePage from 'pages/ProfilePage/ProfilePage';
 import { useState } from 'react';
 import DogPage from 'pages/DogPage/DogPage';
@@ -24,11 +23,11 @@ import Loader from 'components/Loader/Loader';
 import Dashboard from 'pages/Dashboard/Dashboard';
 import Profile from 'services/Profile';
 
-function App(props) {
+function App({ firebaseProfile }) {
 
 
   const dispatch = useDispatch()
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   //CONTROLS LOADER ANIM DURATION
   // useEffect(() => {
@@ -37,13 +36,10 @@ function App(props) {
   //   }, 3000);
   // }, []);
 
-  const { firebase: { auth, profile }, profile: { profile: userProfile } } = useSelector((state) => state);
-
   useEffect(() => {
-    // if (profile.id && Object.keys(userProfile).length < 1) Profile.getProfileByUserId(profile.id)
-    Profile.getProfileByUserId(profile.id)
+    !firebaseProfile.isEmpty && Profile.getProfileByUserId(firebaseProfile.id)
     setLoading(false);
-  }, []);
+  }, [firebaseProfile]);
 
   useEffect(() => {
     dispatch({ type: SET_WINDOW_WIDTH })
@@ -60,7 +56,7 @@ function App(props) {
         {loading ? (
           <Loader />
         ) : (
-          userProfile.isEmpty ? (
+          firebaseProfile.isEmpty ? (
             <Switch>
               <Route exact path='/' component={SignIn} />
               <Route exact path="/sign-in" component={SignIn} />
@@ -94,7 +90,9 @@ App.propTypes = {
 }
 
 const mapStateToProps = (state) => {
-  return {}
+  return {
+    firebaseProfile: state.firebase.profile,
+  }
 };
 
 export default withRouter(connect(mapStateToProps, {})(App));

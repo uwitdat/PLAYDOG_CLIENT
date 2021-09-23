@@ -38,7 +38,10 @@ function SignIn({ responsive }) {
           try {
             const newUser = await local.post('/users/', {
               username: newUserEmail,
-              email: newUserEmail
+              email: newUserEmail,
+              avatar_url: {
+                url: response.profile.avatarUrl
+              }
             })
 
             if (newUser.data.id) {
@@ -53,15 +56,13 @@ function SignIn({ responsive }) {
               history.push("/");
             } else {
               setErrors({
-                "email": errors.email,
-                "password": errors.password,
+                ...errors,
                 "error": "User already exists."
               });
             }
           } catch (err) {
             setErrors({
-              "email": errors.email,
-              "password": errors.password,
+              ...errors,
               "error": err
             });
           }
@@ -70,20 +71,17 @@ function SignIn({ responsive }) {
       console.log(`Error: ${err.message}`)
       if (err.code?.includes('email')) {
         setErrors({
+          ...errors,
           "email": err.message,
-          "password": errors.password,
-          "error": errors.error
         });
       } else if (err.code?.includes('password')) {
         setErrors({
-          "email": errors.email,
+          ...errors,
           "password": err.message,
-          "error": errors.error
         });
       } else {
         setErrors({
-          "email": errors.email,
-          "password": errors.password,
+          ...errors,
           "error": err.message,
         });
       }
