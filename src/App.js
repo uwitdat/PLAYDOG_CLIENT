@@ -22,8 +22,9 @@ import EditProfilePage from 'pages/EditProfilePage/EditProfilePage';
 import Loader from 'components/Loader/Loader';
 import Dashboard from 'pages/Dashboard/Dashboard';
 import Profile from 'services/Profile';
+import ProtectedRoute from 'components/ProtectedRoute/ProtectedRoute';
 
-function App({ firebaseProfile }) {
+function App({ firebaseProfile, authIsEmpty }) {
 
 
   const dispatch = useDispatch()
@@ -56,30 +57,44 @@ function App({ firebaseProfile }) {
         {loading ? (
           <Loader />
         ) : (
-          firebaseProfile.isEmpty ? (
+            <>
+            <HeaderBar />
+
             <Switch>
-              <Route exact path='/' component={SignIn} />
+              <Route exact path='/' component={HomePage} />
               <Route exact path="/sign-in" component={SignIn} />
               <Route exact path="/sign-up" component={SignUp} />
               <Route exact path="/forgot-password" component={ForgotPassword} />
-            </Switch>
-          ) : (
-            <>
-              <HeaderBar />
-              <Switch>
-                <Route exact path='/' component={HomePage} />
-                {/* <Route path="/welcome" component={LandingPage} /> */}
-                <Route path='/events' component={EventsPage} />
-                <Route exact path='/dogs' component={DogsPage} />
-                <Route exact path="/dogs/:id" component={DogPage} />
-                <Route path='/new-event' component={NewEventPage} />
+              <Route path='/events' component={EventsPage} />
+
+              {/* Protected */}
+              <ProtectedRoute path="/profile" authIsEmpty={authIsEmpty}>
                 <Route path="/profile" component={ProfilePage} />
-                <Route exact path="/dashboard" component={Dashboard} />
-                <Route exact path="/profile/edit" component={EditProfilePage} />
-              </Switch>
-              <FooterBar />
+              </ProtectedRoute>
+
+              <ProtectedRoute path="/dashboard" authIsEmpty={authIsEmpty}>
+                <Route path="/dashboard" component={Dashboard} />
+              </ProtectedRoute>
+
+              <ProtectedRoute path="/profile/edit" authIsEmpty={authIsEmpty}>
+                <Route path="/profile/edit" component={EditProfilePage} />
+              </ProtectedRoute>
+
+              <ProtectedRoute path="/dogs" authIsEmpty={authIsEmpty}>
+                <Route path="/dogs" component={DogsPage} />
+              </ProtectedRoute>
+
+              <ProtectedRoute path="/dogs/:id" authIsEmpty={authIsEmpty}>
+                <Route path="/dogs/:id" component={DogPage} />
+              </ProtectedRoute>
+
+              <ProtectedRoute path="/new-event" authIsEmpty={authIsEmpty}>
+                <Route path="/new-event" component={NewEventPage} />
+              </ProtectedRoute>
+            </Switch>
+
+            <FooterBar />
             </>
-          )
         )}
       </>
     </div>
@@ -91,6 +106,7 @@ App.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
+    authIsEmpty: state.firebase.auth.isEmpty,
     firebaseProfile: state.firebase.profile,
   }
 };
