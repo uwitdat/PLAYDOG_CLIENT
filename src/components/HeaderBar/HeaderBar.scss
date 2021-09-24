@@ -1,3 +1,5 @@
+@import "../../assets-styling/stylesheets/mixins";
+
 .HeaderBar {
   height: 7rem;
   margin-bottom: 2rem;
@@ -123,16 +125,30 @@
 .HeaderBar__menu-item {
   font-size: 3.5rem;
   margin-top: 1rem;
-  transition: 300ms;
+  @include transition(300ms);
+
+  &.anim {
+    @include animate(navbar-toggle, 400ms);
+  }
+
+  .anim2 {
+    @include animate(
+    rotate-90-cw,
+    300ms,
+    ease-in-out,
+    forwards,
+    1,
+    400ms,
+    running,
+    normal);
+  }
 }
 
 .HeaderBar__menu-item:hover {
   cursor: pointer;
 }
 
-.anim {
-  transform: rotate(90deg);
-}
+
 .HeaderBar__row {
   margin-top: 1.3rem;
   border: 1px solid var(--border-color);
@@ -208,13 +224,14 @@
   opacity: 0;
   transition: 50ms;
 }
-/* 
-a {
-  text-decoration: none;
-  color: black;
-} */
+
 
 .activate {
   color: var(--color-orange);
   border: 1px solid var(--color-orange);
 }
+/*
+a {
+  text-decoration: none;
+  color: black;
+} */

@@ -50,15 +50,23 @@ function App({ firebaseProfile, authIsEmpty }) {
     // eslint-disable-next-line
   }, [])
 
+  const [expandMenu, setExpandMenu] = useState(false);
+
   return (
-    <div className="App">
+    <div
+      onClick={() => expandMenu && setExpandMenu(false)}
+      className={expandMenu ? 'App expanded-menu': 'App collapsed-menu'}
+    >
       <script crossOrigin="anonymous" src="https://kit.fontawesome.com/831259ec93.js"></script>
       <>
         {loading ? (
           <Loader />
         ) : (
-          <>
-            <HeaderBar />
+          <div>
+            <HeaderBar
+              expandMenu={expandMenu}
+              setExpandMenu={setExpandMenu}
+            />
 
             <Switch>
               <Route exact path='/' component={HomePage} />
@@ -94,7 +102,7 @@ function App({ firebaseProfile, authIsEmpty }) {
             </Switch>
 
             <FooterBar />
-          </>
+          </div>
         )}
       </>
     </div>
