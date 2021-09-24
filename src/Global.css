@@ -55,3 +55,17 @@ p {
 .container {
   padding-top: 100px;
 }
+
+.App {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+}
+.expanded-menu {
+  background-color: rgba(0, 0, 0, 0.712);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 5;
+  transition: 100ms;
+}
