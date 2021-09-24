@@ -62,7 +62,7 @@ const HeaderBar = ({ expandMenu, setExpandMenu }) => {
     };
 
     return (
-        <div style={{ padding: '0', margin: '0' }}>
+        <div style={{ width: '0' }}>
             <Link to='/'>
                 <h1 className='HeaderBar__title'>Walki</h1>
             </Link>

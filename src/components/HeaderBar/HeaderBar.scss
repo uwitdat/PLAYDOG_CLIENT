@@ -1,4 +1,4 @@
-@import "../../assets-styling/stylesheets/mixins";
+// @import "../../assets-styling/stylesheets/mixins";
 
 .HeaderBar {
   height: 7rem;
@@ -125,23 +125,43 @@
 .HeaderBar__menu-item {
   font-size: 3.5rem;
   margin-top: 1rem;
-  @include transition(300ms);
+  // @include transition(300ms);
 
   &.anim {
-    @include animate(navbar-toggle, 400ms);
+    // @include animate(navbar-toggle, 400ms);
+    animation: left 500ms forwards, 300ms rotate 400ms forwards;
+    transition: all ease-in-out;
   }
 
-  .anim2 {
-    @include animate(
-      rotate-90-cw,
-      300ms,
-      ease-in-out,
-      forwards,
-      1,
-      400ms,
-      running,
-      normal
-    );
+  // .anim2 {
+  //   @include animate(
+  //     rotate-90-cw,
+  //     300ms,
+  //     ease-in-out,
+  //     forwards,
+  //     1,
+  //     400ms,
+  //     running,
+  //     normal
+  //   );
+  // }
+}
+
+@keyframes left {
+  0% {
+    transform: translateX(0px);
+  }
+  100% {
+    transform: translateX(-100px);
+  }
+}
+
+@keyframes rotate {
+  0% {
+    transform: translateX(-100px) rotate(0deg);
+  }
+  100% {
+    transform: translateX(-100px) rotate(90deg);
   }
 }
 
