@@ -62,98 +62,102 @@ const HeaderBar = ({ expandMenu, setExpandMenu }) => {
     };
 
     return (
-        <div
-            className='HeaderBar'
-        >
+        <div style={{ padding: '0', margin: '0' }}>
             <Link to='/'>
                 <h1 className='HeaderBar__title'>Walki</h1>
             </Link>
 
+
             <div
-                ref={divRef}
-                className={expandMenu ? "HeaderBar__border expand" : "HeaderBar__border"}
+                className='HeaderBar'
             >
-                {/* Toggle */}
-                <AiOutlineMenu
-                    onClick={() => setExpandMenu(!expandMenu)}
-                    className={
-                        expandMenu
-                        ? "HeaderBar__menu-item  anim" : "HeaderBar__menu-item"}
-                />
-                <Link to='/dashboard'>
-                    <div
-                        className={expandMenu ? "HeaderBar__row" : "HeaderBar__row opacity"}
-                    >
-                        <p>
-                            <MdDashboard />
-                        </p>
-                        <span>Dashboard</span>
-                    </div>
-                </Link>
 
-                <Link to='/dogs'>
-                    <div
-                        onClick={() => handleItemClick(`clicked`)}
-                        className={expandMenu ? "HeaderBar__row" : "HeaderBar__row opacity"}
-                    >
-                        <p>
-                            <FaPaw />
-                        </p>
-                        <span>View Dogs</span>
-                    </div>
-                </Link>
-
-                <Link to='/events'>
-                    <div
-                        onClick={() => handleItemClick(`clicked`)}
-                        className={expandMenu ? "HeaderBar__row" : "HeaderBar__row opacity"}
-                    >
-                        <p>
-                            <AiFillCalendar />
-                        </p>
-                        <span>View Events</span>
-                    </div>
-                </Link>
-
-                <Link to='/new-event'>
-                    <div
-                        onClick={() => handleItemClick(`clicked`)}
-                        className={expandMenu ? "HeaderBar__row" : "HeaderBar__row opacity"}
-                    >
-                        <p>
-                            <AiFillPlusCircle />
-                        </p>
-                        <span>New Event</span>
-                    </div>
-                </Link>
-
-                <Link to='/profile'>
-                    <div
-                        onClick={() => handleItemClick(`clicked`)}
-                        className={expandMenu ? "HeaderBar__row" : "HeaderBar__row opacity"}
-                    >
-                        <p>
-                            <FaUserCircle />
-                        </p>
-                        <span>Profile</span>
-                    </div>
-                </Link>
-
-
-
-                <div className={expandMenu ? "HeaderBar__profile" : "HeaderBar__profile opacity-profile"}>
-                    <Link to='/sign-in'>
+                <div
+                    ref={divRef}
+                    className={expandMenu ? "HeaderBar__border expand" : "HeaderBar__border"}
+                >
+                    {/* Toggle */}
+                    <AiOutlineMenu
+                        onClick={() => setExpandMenu(!expandMenu)}
+                        className={
+                            expandMenu
+                                ? "HeaderBar__menu-item  anim anim2" : "HeaderBar__menu-item"}
+                    />
+                    <Link to='/dashboard'>
                         <div
-                            style={{ border: 'none' }}
                             className={expandMenu ? "HeaderBar__row" : "HeaderBar__row opacity"}
-                            onClick={signOut}
                         >
                             <p>
-                                <FiLogOut />
+                                <MdDashboard />
                             </p>
-                            <span>Logout</span>
+                            <span>Dashboard</span>
                         </div>
                     </Link>
+
+                    <Link to='/dogs'>
+                        <div
+                            onClick={() => handleItemClick(`clicked`)}
+                            className={expandMenu ? "HeaderBar__row" : "HeaderBar__row opacity"}
+                        >
+                            <p>
+                                <FaPaw />
+                            </p>
+                            <span>View Dogs</span>
+                        </div>
+                    </Link>
+
+                    <Link to='/events'>
+                        <div
+                            onClick={() => handleItemClick(`clicked`)}
+                            className={expandMenu ? "HeaderBar__row" : "HeaderBar__row opacity"}
+                        >
+                            <p>
+                                <AiFillCalendar />
+                            </p>
+                            <span>View Events</span>
+                        </div>
+                    </Link>
+
+                    <Link to='/new-event'>
+                        <div
+                            onClick={() => handleItemClick(`clicked`)}
+                            className={expandMenu ? "HeaderBar__row" : "HeaderBar__row opacity"}
+                        >
+                            <p>
+                                <AiFillPlusCircle />
+                            </p>
+                            <span>New Event</span>
+                        </div>
+                    </Link>
+
+                    <Link to='/profile'>
+                        <div
+                            onClick={() => handleItemClick(`clicked`)}
+                            className={expandMenu ? "HeaderBar__row" : "HeaderBar__row opacity"}
+                        >
+                            <p>
+                                <FaUserCircle />
+                            </p>
+                            <span>Profile</span>
+                        </div>
+                    </Link>
+
+
+
+                    <div className={expandMenu ? "HeaderBar__profile" : "HeaderBar__profile opacity-profile"}>
+                        <Link to='/sign-in'>
+                            <div
+                                style={{ border: 'none' }}
+                                className={expandMenu ? "HeaderBar__row" : "HeaderBar__row opacity"}
+                                onClick={signOut}
+                            >
+                                <p>
+                                    <FiLogOut />
+                                </p>
+                                <span>Logout</span>
+                            </div>
+                        </Link>
+                    </div>
                 </div>
             </div>
         </div>

@@ -55,8 +55,9 @@ function App({ firebaseProfile, authIsEmpty }) {
   return (
     <div
       onClick={() => expandMenu && setExpandMenu(false)}
-      className={expandMenu ? 'App expanded-menu': 'App collapsed-menu'}
+      className='App'
     >
+      <div className={expandMenu ? 'expanded-menu' : null}></div>
       <script crossOrigin="anonymous" src="https://kit.fontawesome.com/831259ec93.js"></script>
       <>
         {loading ? (
