@@ -1,12 +1,11 @@
 .HeaderBar {
-  border-bottom: 1px solid var(--color-grey-light);
-  height: 6rem;
+  height: 7rem;
   margin-bottom: 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: var(--color-grey-light);
-  box-shadow: rgba(99, 99, 99, 0.075) 0px 2px 8px 0px;
+  /* background-color: rgb(252, 252, 252); */
+  /* box-shadow: rgba(99, 99, 99, 0.075) 0px 2px 8px 0px; */
   position: fixed;
   z-index: 1;
   top: 0px;
@@ -15,20 +14,21 @@
 .HeaderBar__title {
   color: var(--color-orange);
   font-family: var(--font-title);
-  margin-left: 1rem;
+  margin-left: 2rem;
   letter-spacing: 1px;
   text-shadow: -2px 2px 0px #00e6e6, -5px 5px 0px #01cccc;
-  font-size: 3.5rem;
+  font-size: 4.5rem;
   margin-bottom: -0.5rem;
+  margin-top: 1rem;
 }
 
-.Mobile-nav {
+/* .Mobile-nav {
   height: 6rem;
   width: 100vw;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
-}
+} */
 
 @media only screen and (max-width: 700px) {
   .Mobile-nav {
@@ -84,4 +84,137 @@
   .user-profile-icon {
     display: none;
   }
+}
+
+:root {
+  --main-bg-color: rgb(243, 243, 243);
+  --main-txt-color: rgb(179, 73, 24);
+  --border-color: rgba(92, 92, 92, 0.116);
+  /* --font-primary: "Mukta", sans-serif; */
+  --font-primary: "Luckiest Guy", cursive;
+  --font-secondary: "Inter", sans-serif;
+}
+
+.HeaderBar__border {
+  border: 1px solid var(--main-bg-color);
+  background-color: var(--main-bg-color);
+  width: 7rem;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: 300ms;
+  box-shadow: rgba(0, 0, 0, 0.123) 0px 4px 12px;
+}
+
+@media only screen and (max-width: 700px) {
+  .HeaderBar__border {
+    display: none;
+  }
+}
+
+.expand {
+  width: 26rem;
+}
+
+.HeaderBar__menu-item {
+  font-size: 3.5rem;
+  margin-top: 1rem;
+  transition: 300ms;
+}
+
+.HeaderBar__menu-item:hover {
+  cursor: pointer;
+}
+
+.anim {
+  transform: rotate(90deg);
+}
+.HeaderBar__row {
+  margin-top: 1.3rem;
+  border: 1px solid var(--border-color);
+  width: 24rem;
+  height: 5rem;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: opacity 300ms 0.2s;
+  /* transition-delay: 0.2s; */
+}
+
+.HeaderBar__row:hover {
+  cursor: pointer;
+  border: 1px solid rgb(0, 0, 0);
+  border-radius: 10px;
+  box-shadow: rgba(149, 157, 165, 0.11) 0px 8px 24px;
+}
+
+.HeaderBar__row > * {
+  transition: 200ms;
+}
+
+.HeaderBar__row > p {
+  margin-top: -1rem;
+  font-size: 3rem;
+  margin-left: 0.5rem;
+}
+
+.HeaderBar__row > span {
+  margin-top: 0.8rem;
+  margin-right: 0.8rem;
+  font-size: 2.2rem;
+  /* color: var(--main-txt-color); */
+  font-family: var(--font-primary);
+}
+
+.opacity {
+  display: none;
+  opacity: 0;
+  transition: 100ms;
+}
+
+.HeaderBar__profile {
+  margin-top: auto;
+  margin-bottom: 2rem;
+  height: 3.6rem;
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  transition: 300ms;
+  transition-delay: 0.2s;
+}
+
+.HeaderBar__profile > img {
+  height: 2.3rem;
+  width: 2.3rem;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid white;
+  transition: 300ms;
+}
+
+.HeaderBar__profile > span {
+  font-family: var(--font-secondary);
+  margin-top: 1.5rem;
+  font-size: 0.8rem;
+}
+
+.opacity-profile {
+  opacity: 0;
+  transition: 50ms;
+}
+/* 
+a {
+  text-decoration: none;
+  color: black;
+} */
+
+.activate {
+  color: var(--color-orange);
+  border: 1px solid var(--color-orange);
 }

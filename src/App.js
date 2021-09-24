@@ -62,10 +62,18 @@ function App(props) {
         ) : (
           userProfile.isEmpty ? (
             <Switch>
-              <Route exact path='/' component={SignIn} />
+              <Route exact path='/' component={HomePage} />
               <Route exact path="/sign-in" component={SignIn} />
               <Route exact path="/sign-up" component={SignUp} />
               <Route exact path="/forgot-password" component={ForgotPassword} />
+              <Route path='/events' component={EventsPage} />
+              <Route exact path='/dogs' component={DogsPage} />
+              <Route exact path="/dogs/:id" component={DogPage} />
+              <Route path='/new-event' component={NewEventPage} />
+              <Route path="/profile" component={ProfilePage} />
+              <Route exact path="/dashboard" component={Dashboard} />
+              <Route exact path="/profile/edit" component={EditProfilePage} />
+
             </Switch>
           ) : (
             <>

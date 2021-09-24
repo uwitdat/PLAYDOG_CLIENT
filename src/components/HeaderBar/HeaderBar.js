@@ -1,13 +1,35 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import './HeaderBar.css'
 
 import { useHistory, Link } from "react-router-dom";
 import { SET_ERRORS } from 'redux-store/types';
 import { useDispatch } from 'react-redux';
 import { useFirebase } from "react-redux-firebase";
-import { FaUserCircle } from 'react-icons/fa'
+import { FaUserCircle, FaPaw } from 'react-icons/fa'
+import { AiOutlineMenu, AiFillPlusCircle, AiFillCalendar } from 'react-icons/ai'
+import { FiLogOut } from 'react-icons/fi'
+import { MdDashboard } from 'react-icons/md'
+
 
 const HeaderBar = () => {
+    const [expandMenu, setExpandMenu] = useState(false);
+    const divRef = useRef(null);
+
+    // collapses menu when clicked outside.
+    const handleMenu = () => {
+        document.addEventListener("click", (e) => {
+            if (divRef.current.contains(e.target)) {
+                setExpandMenu(!expandMenu);
+            } else {
+                setExpandMenu(false);
+            }
+        });
+    };
+
+    const handleItemClick = (param) => {
+        console.log(param);
+    };
+
     const firebase = useFirebase();
     const history = useHistory();
     const dispatch = useDispatch();
@@ -44,7 +66,7 @@ const HeaderBar = () => {
             <Link to='/'>
                 <h1 className='HeaderBar__title'>Walki</h1>
             </Link>
-            <div className='Mobile-nav'>
+            {/*    <div className='Mobile-nav'>
                  <Link to='/dashboard'>
                     <div onClick={() => setPath('http://localhost:3000/PLAYDOG_CLIENT#/dashboard')} className={path === 'http://localhost:3000/PLAYDOG_CLIENT#/dashboard' ? 'Mobile-nav-elm border-orange' : 'Mobile-nav-elm'}>
                         <p className={path === 'http://localhost:3000/PLAYDOG_CLIENT#/dashboard' ? 'Mobile-nav-elm__text black' : 'Mobile-nav-elm__text'}>Dashboard</p>
@@ -65,11 +87,11 @@ const HeaderBar = () => {
                         <p className={path === 'http://localhost:3000/PLAYDOG_CLIENT#/new-event' ? 'Mobile-nav-elm__text black' : 'Mobile-nav-elm__text'}>New Event</p>
                     </div>
                 </Link>
-                {/* <Link to='/login'> */}
+                {/* <Link to='/login'> 
                 <div onClick={signOut} className={path === '/login' ? 'Mobile-nav-elm border-orange black' : 'Mobile-nav-elm'}>
                     <p className={path === '/login' ? 'Mobile-nav-elm__text black' : 'Mobile-nav-elm__text'}>Logout</p>
                 </div>
-                {/* </Link> */}
+                {/* </Link> 
                 <Link to='/profile'>
                     <div onClick={() => setPath('http://localhost:3000/PLAYDOG_CLIENT#/profile')} className={path === 'http://localhost:3000/PLAYDOG_CLIENT#/profile' ? 'Mobile-nav-elm border-orange black' : 'Mobile-nav-elm'}>
                         <p className={path === 'http://localhost:3000/PLAYDOG_CLIENT#/profile' ? 'Mobile-nav-elm__text black' : 'Mobile-nav-elm__text'}>Profile</p>
@@ -82,8 +104,96 @@ const HeaderBar = () => {
             <Link to='/profile'>
                 <div onClick={() => setPath('http://localhost:3000/PLAYDOG_CLIENT#/profile')} className={path === 'http://localhost:3000/PLAYDOG_CLIENT#/profile' ? 'user-profile-icon black' : 'user-profile-icon'}>
                     <FaUserCircle />
+                </div> 
+    </Link> */}
+
+
+
+
+
+            <div ref={divRef} className={expandMenu ? "HeaderBar__border expand" : "HeaderBar__border"}>
+                <AiOutlineMenu
+                    onClick={handleMenu}
+                    className={expandMenu ? "HeaderBar__menu-item  anim" : "HeaderBar__menu-item"}
+                />
+                <Link to='/dashboard'>
+                    <div onClick={() => setPath('http://localhost:3000/PLAYDOG_CLIENT#/dashboard')}
+
+                        className={expandMenu ? "HeaderBar__row" : "HeaderBar__row opacity"}
+
+                    >
+                        <p>
+                            <MdDashboard />
+                        </p>
+                        <span>Dashboard</span>
+                    </div>
+                </Link>
+
+                <Link to='/dogs'>
+                    <div
+                        onClick={() => handleItemClick(`clicked`)}
+                        className={expandMenu ? "HeaderBar__row" : "HeaderBar__row opacity"}
+                    >
+                        <p>
+                            <FaPaw />
+                        </p>
+                        <span>View Dogs</span>
+                    </div>
+                </Link>
+
+                <Link to='/events'>
+                    <div
+                        onClick={() => handleItemClick(`clicked`)}
+                        className={expandMenu ? "HeaderBar__row" : "HeaderBar__row opacity"}
+                    >
+                        <p>
+                            <AiFillCalendar />
+                        </p>
+                        <span>View Events</span>
+                    </div>
+                </Link>
+
+                <Link to='/new-event'>
+                    <div
+                        onClick={() => handleItemClick(`clicked`)}
+                        className={expandMenu ? "HeaderBar__row" : "HeaderBar__row opacity"}
+                    >
+                        <p>
+                            <AiFillPlusCircle />
+                        </p>
+                        <span>New Event</span>
+                    </div>
+                </Link>
+
+                <Link to='/profile'>
+                    <div
+                        onClick={() => handleItemClick(`clicked`)}
+                        className={expandMenu ? "HeaderBar__row" : "HeaderBar__row opacity"}
+                    >
+                        <p>
+                            <FaUserCircle />
+                        </p>
+                        <span>Profile</span>
+                    </div>
+                </Link>
+
+
+
+                <div className={expandMenu ? "HeaderBar__profile" : "HeaderBar__profile opacity-profile"}>
+                    <Link to='/sign-in'>
+                        <div
+                            style={{ border: 'none' }}
+                            className={expandMenu ? "HeaderBar__row" : "HeaderBar__row opacity"}
+                            onClick={signOut}
+                        >
+                            <p>
+                                <FiLogOut />
+                            </p>
+                            <span>Logout</span>
+                        </div>
+                    </Link>
                 </div>
-            </Link>
+            </div>
         </div>
     )
 }
