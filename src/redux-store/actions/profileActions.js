@@ -1,5 +1,5 @@
 import local from "api/local";
-import { SET_ERRORS, SET_PROFILES, SET_USER_PROFILE } from "../types";
+import { SET_ERRORS, SET_PROFILES, SET_USER_PROFILE, UPDATE_PROFILE } from "../types";
 
 export const _getProfileByUserId = (userId) => async (dispatch) => {
   try {
@@ -51,6 +51,27 @@ export const _getProfileById = (id) => async (dispatch) => {
       console.log(results)
       return dispatch({
         type: SET_PROFILES,
+        payload: results,
+      })
+    }
+  } catch(err) {
+    return dispatch({
+      type: SET_ERRORS,
+      payload: err
+    })
+  }
+}
+
+export const _updateProfileById = (id, profile) => async (dispatch) => {
+  try {
+    const response = await local.put(`profiles/${id}`, profile)
+
+    if (response.status === 200) {
+      const results = response.data || []
+
+      console.log(results)
+      return dispatch({
+        type: UPDATE_PROFILE,
         payload: results,
       })
     }

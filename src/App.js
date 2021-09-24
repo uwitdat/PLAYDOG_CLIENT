@@ -15,7 +15,6 @@ import { useEffect } from 'react';
 import HeaderBar from 'components/HeaderBar/HeaderBar';
 import FooterBar from 'components/FooterBar/FooterBar';
 import { withRouter } from "react-router-dom";
-import { useSelector } from 'react-redux'
 import ProfilePage from 'pages/ProfilePage/ProfilePage';
 import { useState } from 'react';
 import DogPage from 'pages/DogPage/DogPage';
@@ -23,12 +22,13 @@ import EditProfilePage from 'pages/EditProfilePage/EditProfilePage';
 import Loader from 'components/Loader/Loader';
 import Dashboard from 'pages/Dashboard/Dashboard';
 import Profile from 'services/Profile';
+import ProtectedRoute from 'components/ProtectedRoute/ProtectedRoute';
 
-function App(props) {
+function App({ firebaseProfile, authIsEmpty }) {
 
 
   const dispatch = useDispatch()
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   //CONTROLS LOADER ANIM DURATION
   // useEffect(() => {
@@ -37,13 +37,10 @@ function App(props) {
   //   }, 3000);
   // }, []);
 
-  const { firebase: { auth, profile }, profile: { profile: userProfile } } = useSelector((state) => state);
-
   useEffect(() => {
-    // if (profile.id && Object.keys(userProfile).length < 1) Profile.getProfileByUserId(profile.id)
-    Profile.getProfileByUserId(profile.id)
+    !firebaseProfile.isEmpty && Profile.getProfileByUserId(firebaseProfile.id)
     setLoading(false);
-  }, []);
+  }, [firebaseProfile]);
 
   useEffect(() => {
     dispatch({ type: SET_WINDOW_WIDTH })
@@ -60,38 +57,44 @@ function App(props) {
         {loading ? (
           <Loader />
         ) : (
-          userProfile.isEmpty ? (
+          <>
+            <HeaderBar />
+
             <Switch>
               <Route exact path='/' component={HomePage} />
               <Route exact path="/sign-in" component={SignIn} />
               <Route exact path="/sign-up" component={SignUp} />
               <Route exact path="/forgot-password" component={ForgotPassword} />
               <Route path='/events' component={EventsPage} />
-              <Route exact path='/dogs' component={DogsPage} />
-              <Route exact path="/dogs/:id" component={DogPage} />
-              <Route path='/new-event' component={NewEventPage} />
-              <Route path="/profile" component={ProfilePage} />
-              <Route exact path="/dashboard" component={Dashboard} />
-              <Route exact path="/profile/edit" component={EditProfilePage} />
 
-            </Switch>
-          ) : (
-            <>
-              <HeaderBar />
-              <Switch>
-                <Route exact path='/' component={HomePage} />
-                {/* <Route path="/welcome" component={LandingPage} /> */}
-                <Route path='/events' component={EventsPage} />
-                <Route exact path='/dogs' component={DogsPage} />
-                <Route exact path="/dogs/:id" component={DogPage} />
-                <Route path='/new-event' component={NewEventPage} />
+              {/* Protected */}
+              <ProtectedRoute path="/profile" authIsEmpty={authIsEmpty}>
                 <Route path="/profile" component={ProfilePage} />
-                <Route exact path="/dashboard" component={Dashboard} />
-                <Route exact path="/profile/edit" component={EditProfilePage} />
-              </Switch>
-              <FooterBar />
-            </>
-          )
+              </ProtectedRoute>
+
+              <ProtectedRoute path="/dashboard" authIsEmpty={authIsEmpty}>
+                <Route path="/dashboard" component={Dashboard} />
+              </ProtectedRoute>
+
+              <ProtectedRoute path="/profile/edit" authIsEmpty={authIsEmpty}>
+                <Route path="/profile/edit" component={EditProfilePage} />
+              </ProtectedRoute>
+
+              <ProtectedRoute path="/dogs" authIsEmpty={authIsEmpty}>
+                <Route path="/dogs" component={DogsPage} />
+              </ProtectedRoute>
+
+              <ProtectedRoute path="/dogs/:id" authIsEmpty={authIsEmpty}>
+                <Route path="/dogs/:id" component={DogPage} />
+              </ProtectedRoute>
+
+              <ProtectedRoute path="/new-event" authIsEmpty={authIsEmpty}>
+                <Route path="/new-event" component={NewEventPage} />
+              </ProtectedRoute>
+            </Switch>
+
+            <FooterBar />
+          </>
         )}
       </>
     </div>
@@ -102,7 +105,10 @@ App.propTypes = {
 }
 
 const mapStateToProps = (state) => {
-  return {}
+  return {
+    authIsEmpty: state.firebase.auth.isEmpty,
+    firebaseProfile: state.firebase.profile,
+  }
 };
 
 export default withRouter(connect(mapStateToProps, {})(App));
